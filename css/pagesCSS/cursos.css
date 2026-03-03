@@ -63,22 +63,23 @@ body{background-color: white;}
     border-top-right-radius: 20px;
 }
 
-.divCurso span{
-    position: absolute;
-
-    background-color: rgba(0, 0, 0, 0.562);
+.spanInfo{
+    background-color: rgba(0, 0, 0, 0.726);
     color: white;
 
     padding: 5px;
     border-radius: 10px;
-    top: 6px;
 }
 
 .divCurso .level{
+    position: absolute;
+    top: 6px;
     left: 6px;
 }
 
 .divCurso .time{
+    position: absolute;
+    top: 6px;
     right: 6px;
 }
 
@@ -121,7 +122,98 @@ body{background-color: white;}
 
 /*-----------ENROLL NOW STYLE-----------*/
 
+/*Estilo del banner de cada curso*/
+
+#backBtn{
+    width: 120px;
+    border: none;
+    background-color: #f4f6f8;
+    color: blue;
+}
+
 .divImgInfo{
-    width: 1000px;
-    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+
+    width: 90vw;
+    max-width: 1000px;
+    height: 250px;
+
+    border-radius: 30px;
+    padding: 20px;
+    padding-top: 40px;
+
+    color: white;
+}
+
+.divImgInfo p{
+    color: #acacac;
+}
+
+.divImgInfo .teacherInfo{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.divImgInfo img{
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+
+    
+}
+
+/*estilos del contener de la informacion del curso*/
+
+.divInfoCourse{display: flex;gap: 15px;}
+
+.divInfoCourse .cardsContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.divInfoCourse .card{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    height: fit-content;
+
+    padding: 20px;
+    border-radius: 20px;
+
+    background-color: #EEEEEE;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.315);
+}
+
+.divInfoCourse .card p{color: #3D3D3D;}
+
+.divInfoCourse .card .modulo{
+    padding: 10px;
+    border-radius: 15px;
+    background-color: #dfdede;
+}
+
+.divInfoCourse .card .modulo span:nth-child(1){
+    color: #2446b6;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.divInfoCourse .card button{
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    background-color: #FFD369;
+    padding: 10px;
+}
+
+.espace{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
