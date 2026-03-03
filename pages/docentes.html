@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/pagesCSS/docentes.css">
+
+    <!--FONTS-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Climate+Crisis:YEAR@1979&display=swap" rel="stylesheet">
+    <!--ICONS-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <nav>
+        <p class="logo">ABC</p>
+        <div class="navMenu">
+            <a href="../index.html">Dashboard</a>
+            <a href="cursos.html">Cursos</a>
+            <a href="docentes.html">Docentes</a>
+            <a href="">Administrativos</a>
+        </div>
+        <div class="profileDiv">
+            <button class="themeBtn">
+                <img src="../media/sun.png" alt="">
+            </button>
+            <button class="profileBtn">
+                <img src="../media/profilePlaceholder.png" alt="">
+                <p>Pepito Perez</p>
+                <i class="fa-solid fa-sort-down"></i>
+            </button>
+        </div>
+        </nav>
+        <main>
+            <header>
+                <h1 class="pageTitle">Docentes</h1>
+            </header>
+            <form id="searchForm">
+                <input type="text" name="" id="searchInput" placeholder="Buscar">
+                <select name="" id="searchSelect" placeholder="aa">
+                    <option value="" disabled hidden selected>Área</option>
+                </select>
+                <button id="searchBtn">Buscar</button>
+            </form>
+
+            <div id="tableDiv">
+                <div class="tableHeaderDiv">
+                    <div>Nombre</div>
+                    <div>Còdigo</div>
+                    <div>Email</div>
+                    <div>Àrea</div>
+                    <div></div>
+                </div>
+            </div>
+        </main>
+</body>
+<script src="../utils/docentes.js" type="module"></script>
+</html>

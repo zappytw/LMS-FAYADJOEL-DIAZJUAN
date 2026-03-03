@@ -1,0 +1,97 @@
+.tableHeaderDiv, .profesorDiv{
+    display: grid;
+    grid-template-columns: 2fr 2fr 2fr 2fr 1fr;
+    justify-items: center;
+}
+.profesorDiv img{
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+}
+.profesorDiv{
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.548);
+    border-radius: 10px;
+    padding: 10px;
+}
+.tableHeaderDiv div{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+#tableDiv{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+    border: 2px solid;
+    padding: 20px;
+    border-radius: 10px;
+}
+.profesorName{
+    justify-self: left;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+
+.deleteBtn{
+    border-color: red;
+    color: rgb(155, 0, 0);
+    width: 40px;
+    border-radius: 100%;
+}
+
+.editBtn{
+    border-color: orange;
+    color: rgb(163, 106, 0);
+    width: 40px;
+}
+
+.deleteBtn:hover{
+    background-color: red;
+    color: white;
+}
+.editBtn:hover{
+    background-color: orange;
+    color: white;
+}
+.profesorDivBtns{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+#searchForm{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+#searchForm > *{
+    border: 1px solid;
+    font-size: 16px;
+    padding: 10px;
+}
+#searchInput{
+    height: 40px;
+    width: 500px;
+    border-top-left-radius: 20px ;
+    border-bottom-left-radius: 20px;
+    border-right: none;
+    cursor: text;
+
+}
+
+#searchBtn{
+    border-left: none;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    width: 100px;
+    cursor: pointer;
+}
+#searchSelect{
+    width: 100px;
+    border-left: none;
+    border-right: none;
+}
