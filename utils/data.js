@@ -248,96 +248,128 @@ const cursosDisponibles = {
 };
 
 const profesores = [
-    {
-      codigo: "PROF001",
-      identificacion: "1023456789",
-      nombres: "Laura",
-      apellidos: "Gómez Martínez",
-      email: "laura.gomez@lmsacademy.com",
-      fotoUrl: "https://randomuser.me/api/portraits/women/45.jpg",
-      areaAcademica: "Biología"
-    },
-    {
-      codigo: "PROF002",
-      identificacion: "1034567891",
-      nombres: "Carlos",
-      apellidos: "Ramírez Torres",
-      email: "carlos.ramirez@lmsacademy.com",
-      fotoUrl: "https://randomuser.me/api/portraits/men/32.jpg",
-      areaAcademica: "Informática"
-    },
-    {
-      codigo: "PROF003",
-      identificacion: "1045678912",
-      nombres: "Mariana",
-      apellidos: "López Herrera",
-      email: "mariana.lopez@lmsacademy.com",
-      fotoUrl: "https://randomuser.me/api/portraits/women/12.jpg",
-      areaAcademica: "Matemáticas"
-    },
-    {
-      codigo: "PROF004",
-      identificacion: "1056789123",
-      nombres: "Andrés",
-      apellidos: "Castro Díaz",
-      email: "andres.castro@lmsacademy.com",
-      fotoUrl: "https://randomuser.me/api/portraits/men/41.jpg",
-      areaAcademica: "Física"
-    },
-    {
-      codigo: "PROF005",
-      identificacion: "1067891234",
-      nombres: "Valentina",
-      apellidos: "Morales Ríos",
-      email: "valentina.morales@lmsacademy.com",
-      fotoUrl: "https://randomuser.me/api/portraits/women/68.jpg",
-      areaAcademica: "Química"
-    },
-    {
-      codigo: "PROF006",
-      identificacion: "1078912345",
-      nombres: "Sebastián",
-      apellidos: "Vargas Peña",
-      email: "sebastian.vargas@lmsacademy.com",
-      fotoUrl: "https://randomuser.me/api/portraits/men/55.jpg",
-      areaAcademica: "Historia"
-    },
-    {
-      codigo: "PROF007",
-      identificacion: "1089123456",
-      nombres: "Daniela",
-      apellidos: "Ortega Ruiz",
-      email: "daniela.ortega@lmsacademy.com",
-      fotoUrl: "https://randomuser.me/api/portraits/women/27.jpg",
-      areaAcademica: "Lengua Castellana"
-    },
-    {
-      codigo: "PROF008",
-      identificacion: "1091234567",
-      nombres: "Juan",
-      apellidos: "Pérez Salazar",
-      email: "juan.perez@lmsacademy.com",
-      fotoUrl: "https://randomuser.me/api/portraits/men/18.jpg",
-      areaAcademica: "Educación Física"
-    },
-    {
-      codigo: "PROF009",
-      identificacion: "1102345678",
-      nombres: "Camila",
-      apellidos: "Navarro Silva",
-      email: "camila.navarro@lmsacademy.com",
-      fotoUrl: "https://randomuser.me/api/portraits/women/33.jpg",
-      areaAcademica: "Inglés"
-    },
-    {
-      codigo: "PROF010",
-      identificacion: "1113456789",
-      nombres: "Miguel",
-      apellidos: "Rojas Méndez",
-      email: "miguel.rojas@lmsacademy.com",
-      fotoUrl: "https://randomuser.me/api/portraits/men/60.jpg",
-      areaAcademica: "Filosofía"
-    }
+  {
+    codigo: "PROF001",
+    identificacion: "1023456789",
+    nombres: "Laura",
+    apellidos: "Gómez Martínez",
+    email: "laura.gomez@lmsacademy.com",
+    fotoUrl: "https://randomuser.me/api/portraits/women/45.jpg",
+    areaAcademica: "Biología",
+    cursos: [
+      { categoriaId: 2, cursoId: 201 }
+    ]
+  },
+  {
+    codigo: "PROF002",
+    identificacion: "1034567891",
+    nombres: "Carlos",
+    apellidos: "Ramírez Torres",
+    email: "carlos.ramirez@lmsacademy.com",
+    fotoUrl: "https://randomuser.me/api/portraits/men/32.jpg",
+    areaAcademica: "Informática",
+    cursos: [
+      { categoriaId: 1, cursoId: 101 },
+      { categoriaId: 1, cursoId: 102 }
+    ]
+  },
+  {
+    codigo: "PROF003",
+    identificacion: "1045678912",
+    nombres: "Mariana",
+    apellidos: "López Herrera",
+    email: "mariana.lopez@lmsacademy.com",
+    fotoUrl: "https://randomuser.me/api/portraits/women/12.jpg",
+    areaAcademica: "Matemáticas",
+    cursos: [
+      { categoriaId: 2, cursoId: 203 }
+    ]
+  },
+  {
+    codigo: "PROF004",
+    identificacion: "1056789123",
+    nombres: "Andrés",
+    apellidos: "Castro Díaz",
+    email: "andres.castro@lmsacademy.com",
+    fotoUrl: "https://randomuser.me/api/portraits/men/41.jpg",
+    areaAcademica: "Física",
+    cursos: [
+      { categoriaId: 2, cursoId: 202 }
+    ]
+  },
+  {
+    codigo: "PROF005",
+    identificacion: "1067891234",
+    nombres: "Valentina",
+    apellidos: "Morales Ríos",
+    email: "valentina.morales@lmsacademy.com",
+    fotoUrl: "https://randomuser.me/api/portraits/women/68.jpg",
+    areaAcademica: "Química",
+    cursos: [
+      { categoriaId: 1, cursoId: 103 }
+    ]
+  },
+  {
+    codigo: "PROF006",
+    identificacion: "1078912345",
+    nombres: "Sebastián",
+    apellidos: "Vargas Peña",
+    email: "sebastian.vargas@lmsacademy.com",
+    fotoUrl: "https://randomuser.me/api/portraits/men/55.jpg",
+    areaAcademica: "Historia",
+    cursos: [
+      { categoriaId: 3, cursoId: 301 }
+    ]
+  },
+  {
+    codigo: "PROF007",
+    identificacion: "1089123456",
+    nombres: "Daniela",
+    apellidos: "Ortega Ruiz",
+    email: "daniela.ortega@lmsacademy.com",
+    fotoUrl: "https://randomuser.me/api/portraits/women/27.jpg",
+    areaAcademica: "Lengua Castellana",
+    cursos: [
+      { categoriaId: 3, cursoId: 302 }
+    ]
+  },
+  {
+    codigo: "PROF008",
+    identificacion: "1091234567",
+    nombres: "Juan",
+    apellidos: "Pérez Salazar",
+    email: "juan.perez@lmsacademy.com",
+    fotoUrl: "https://randomuser.me/api/portraits/men/18.jpg",
+    areaAcademica: "Educación Física",
+    cursos: [
+      { categoriaId: 3, cursoId: 303 }
+    ]
+  },
+  {
+    codigo: "PROF009",
+    identificacion: "1102345678",
+    nombres: "Camila",
+    apellidos: "Navarro Silva",
+    email: "camila.navarro@lmsacademy.com",
+    fotoUrl: "https://randomuser.me/api/portraits/women/33.jpg",
+    areaAcademica: "Inglés",
+    cursos: [
+      { categoriaId: 4, cursoId: 401 }
+    ]
+  },
+  {
+    codigo: "PROF010",
+    identificacion: "1113456789",
+    nombres: "Miguel",
+    apellidos: "Rojas Méndez",
+    email: "miguel.rojas@lmsacademy.com",
+    fotoUrl: "https://randomuser.me/api/portraits/men/60.jpg",
+    areaAcademica: "Filosofía",
+    cursos: [
+      { categoriaId: 4, cursoId: 402 },
+      { categoriaId: 4, cursoId: 403 }
+    ]
+  }
 ];
 
 export function inicializarCursosDisponibles(){
@@ -352,7 +384,7 @@ export function inicializarCursosDisponibles(){
 }
 
 export function inicializarProfesores(){
-  const profesoresExists = localStorage.getItem("profesores");
+  const profesoresExists = localStorage.getItem("profesores");  
 
   if(!profesoresExists){
     console.log("No se encontraron datos previamente colocador usaremos los de por defecto")
