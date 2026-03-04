@@ -6,7 +6,15 @@ const profesoresData = JSON.parse(localStorage.getItem("profesores"))
 const searchForm = document.getElementById("searchForm")
 const searchInput = document.getElementById("searchInput")
 const searchSelect = document.getElementById("searchSelect")
+const editProfesorDiv = document.getElementById("bigProfesorDiv")
+const overlay = document.getElementById("overlay")
 
+//Datos de profesor individual
+const persInfoName = document.getElementById("persInfoName")
+const persInfoImg = document.getElementById("persInfoImg")
+const persInfoDocument = document.getElementById("persInfoDocument")
+const persInfoEmail = document.getElementById("persInfoEmail")
+const persInfoId = document.getElementById("persInfoId")
 
 function mostrarProfesores(data){
     data.forEach(profesor => {
@@ -78,19 +86,32 @@ function editProfesor(editBtn){
     console.log("EDITAR"+editBtn.dataset.id)
     let profesorData = buscarProfesores(editBtn.dataset.id)
     console.log(profesorData)
-    const editProfesorDiv = document.createElement("div")
-    editProfesorDiv.classList.add("editProfesorDiv")
-    editProfesorDiv.innerHTML=`
-    <div><img src=${profesorData[0].fotoUrl}></div>
-    <div>${profesorData[0].nombres} ${profesorData[0].apellidos}</div>
-    <div>${profesorData[0].email}</div>
-    <div>${profesorData[0].codigo}</div>
-    <div>${profesorData[0].identificacion}</div>
-    <div>${profesorData[0].areaAcademica}</div>
-    `
+    editProfesorDiv.classList.remove("hidden")
+    overlay.classList.remove("hidden")
+    document.body.style.overflow =  "hidden";
 
-    document.body.append(editProfesorDiv)
+    persInfoImg.src=profesorData[0].fotoUrl
+    persInfoName.textContent=profesorData[0].nombres + " " + profesorData[0].apellidos
+    persInfoDocument.textContent=profesorData[0].identificacion
+    persInfoEmail.textContent=profesorData[0].email
+    persInfoId.textContent=profesorData[0].codigo
+
 }
+function cerrarEdit(){
+    editProfesorDiv.classList.add("hidden")
+    overlay.classList.add("hidden")
+    document.body.style.overflow="auto";
+}
+overlay.addEventListener("click", (e)=> {
+    if(e.target===overlay){
+        cerrarEdit()
+    }
+})
+document.addEventListener("keydown",(e)=>{
+    if(e.key==='Escape' && !editProfesorDiv.classList.contains("hidden")){
+        cerrarEdit()
+    }
+})
 tableDiv.addEventListener("click", (e)=>{
     const editBtn = e.target.closest(".editBtn");
     const deleteBtn = e.target.closest(".deleteBtn");
@@ -101,3 +122,4 @@ tableDiv.addEventListener("click", (e)=>{
     console.log("ELIMINAR" + deleteBtn.dataset.id)
     }
 })
+

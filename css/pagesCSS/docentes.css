@@ -26,6 +26,7 @@
     max-width: 90vw;
     gap: 20px;
     border: 2px solid;
+    box-shadow: 0 0 10px black;
     padding: 20px;
     border-radius: 10px;
 }
@@ -68,6 +69,7 @@
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
+    min-width: 600px;
 }
 #searchForm > *{
     border: 1px solid;
@@ -76,7 +78,7 @@
 }
 #searchInput{
     height: 40px;
-    width: 500px;
+    width: 60%;
     border-top-left-radius: 20px ;
     border-bottom-left-radius: 20px;
     border-right: none;
@@ -88,11 +90,11 @@
     border-left: none;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
-    width: 100px;
+    width: 10%;
     cursor: pointer;
 }
 #searchSelect{
-    width: 200px;
+    width: 20%;
     border-left: none;
     border-right: none;
     background-color: rgb(202, 202, 202);
@@ -101,4 +103,78 @@
 
 #searchSelect option{
     transition: ease 1s;
+}
+#bigProfesorDiv{
+    justify-self: center;
+    align-self: center;
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    border-radius: 10px;
+    z-index: 1001;
+    justify-content: center;
+    position: fixed;
+    inset: 0;
+    background-color: transparent;
+}
+.persInfoDiv, .otherDiv{
+    max-width: 700px;
+    width: 80vw;
+    height: 700px;
+    border-radius: 10px;
+    z-index: 1001;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box ;
+    flex-direction: column;
+    background-color: white;
+}
+.profesorInfoImg{
+    width: 200px;
+    height: 200px;
+    border: 4px solid #222;
+    border-radius: 10px;
+}
+.persInfo{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.persInfo div{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.persInfo dt{
+    font-size: 18px;
+
+}
+.persInfoDiv dd{
+    padding: 5px;
+    width: 100%;
+    border: none;
+    background-color: #dbdbdb;
+    border-radius: 10px;
+    color: #525252;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.persInfoDiv hr{
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.profesorProfile{
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
 }

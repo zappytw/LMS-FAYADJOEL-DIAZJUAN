@@ -32,7 +32,7 @@
             </button>
             <button class="profileBtn">
                 <img src="../media/profilePlaceholder.png" alt="">
-                <p>Pepito Perez</p>
+                <div class="userName">Pepito Perez</div>
                 <i class="fa-solid fa-sort-down"></i>
             </button>
         </div>
@@ -59,6 +59,33 @@
                 </div>
             </div>
         </main>
+    <div id="overlay" class="hidden">
+        <div id="bigProfesorDiv" class="hidden">
+            <div class="persInfoDiv">
+                <div class="profesorProfile">
+                <img class="profesorInfoImg" id="persInfoImg" src="../media/profilePlaceholder.png" alt="">
+                <div id="persInfoName">Cargando...</div>
+                </div>
+                <hr>
+                <dl class="persInfo">
+                    <div>
+                        <dt>Nº Documento</dt>
+                        <dd id="persInfoDocument">Cargando...</dd>
+                    </div>
+                    <div>
+                        <dt>Correo Electrónico</dt>
+                        <dd id="persInfoEmail">Cargando.../dd>
+                    </div>
+                    <div>
+                        <dt>ID</dt>
+                        <dd id="persInfoId">Cargando...</dd>
+                    </div>
+                </dl>
+            </div>
+            <div class="otherDiv">
+            </div>
+        </div>
+    </div>
 </body>
 <script src="../utils/docentes.js" type="module"></script>
 </html>
