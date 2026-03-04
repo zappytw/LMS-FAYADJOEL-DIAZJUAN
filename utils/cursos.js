@@ -1,11 +1,15 @@
 import { inicializarCursosDisponibles, inicializarProfesores} from "./data.js";
+import { cargarTema ,cambiarTema} from "./basicFuntions.js"
 
-localStorage.clear();
+cargarTema()
+document.getElementById("themeBtn").addEventListener("click",cambiarTema)
+
+//localStorage.clear();
 
 inicializarCursosDisponibles();
 inicializarProfesores()
-const cursosDisponibles = JSON.parse(localStorage.getItem("cursosDisponibles"));
-const profesores = JSON.parse(localStorage.getItem("profesores"));
+let cursosDisponibles = JSON.parse(localStorage.getItem("cursosDisponibles"));
+let profesores = JSON.parse(localStorage.getItem("profesores"));
 
 const pageContent = document.getElementById("pageContent")
 const btnCrearForm = document.getElementById("btmCrear")
@@ -39,15 +43,18 @@ function showCursosDisponibles(){
 
             divCurso.innerHTML = `
                 <span class="spanInfo level">${curso.nivel}</span>
-                <span class="spanInfo time">${curso.duracion}</span>
+                <span class="spanInfo time">${curso.duracion} semanas</span>
                 <img src="${curso.imagen}">
                 <div class="info">
                     <h2>${curso.titulo}</h2>
                     <p>${curso.descripcion}</p>
                 </div>
-                <div class="btns">
-                    <button id="${curso.id}" class="btnEnrollNow">Enroll Now</button>
-                    <button>More Info</button>
+                <div class="btns" data-id="${curso.id}"> 
+                    <button class="btnEnrollNow">Enroll Now</button>
+                    <div>
+                        <button class="btnEdit"><i class="fa-solid fa-pen"></i></button>
+                        <button class="btnRemove"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
                 </div>
             `;
 
@@ -58,7 +65,6 @@ function showCursosDisponibles(){
 
         pageContent.appendChild(divCategoria)
     });
-    
 }
 
 function añadirSelectCategoriaProfeForm(){
@@ -133,25 +139,50 @@ crearModuloBtn.addEventListener("click",()=>{
     moduloContenido.value = ""
 })
 
+function eliminarCurso(IDcurso){
+    return {
+        ...cursosDisponibles,
+        categorias: cursosDisponibles.categorias.map(cat => ({
+            ...cat,
+            cursos: cat.cursos.filter(curso => curso.id !== IDcurso)
+        }))
+    };
+}
+
+function eliminarCursoAProfesor(codigoProfesor,IDcurso){
+    return profesores.map( p => {
+        if (p.codigo !== codigoProfesor) return p
+
+        return {
+            ...p,
+            cursos: p.cursos.filter(c => c.cursoId !== IDcurso)
+        }
+    })
+}
+
 pageContent.addEventListener("click", function(event) {
     
-    if (event.target.classList.contains("btnEnrollNow")) {
+    const btnContainer = event.target.closest(".btns");
+
+    if (!btnContainer) return;
+
+    const IDcurso = Number(btnContainer.dataset.id);
+
+    const IDcategoria = Math.floor(IDcurso / Math.pow(10, Math.floor(Math.log10(IDcurso))));
+        
+    const dataCategoria = cursosDisponibles.categorias.find(categoria => categoria.id === IDcategoria);
+    const dataCurso = dataCategoria.cursos.find(curso => curso.id === IDcurso);
+    const dataProfesor = profesores.find(p =>
+        p.cursos.some(c => c.cursoId === IDcurso)
+    );
+
+    if (event.target.closest(".btnEnrollNow")) {
         window.scrollTo({
             top: 0,
             behavior: "smooth"
         });
         pageContent.innerHTML = '<button id="backBtn"><--Back to courses</button>';
         document.getElementById("backBtn").addEventListener("click", showCursosDisponibles);
-
-        const IDcurso = Number(event.target.id);
-        const IDcategoria = Math.floor(IDcurso / Math.pow(10, Math.floor(Math.log10(IDcurso))));
-        
-        const dataCategoria = cursosDisponibles.categorias.find(categoria => categoria.id === IDcategoria);
-        const dataCurso = dataCategoria.cursos.find(curso => curso.id === IDcurso);
-
-        const dataProfesor = profesores.find(p =>
-            p.cursos.some(c => c.cursoId === IDcurso)
-        );
 
         const divImgInfo = document.createElement("div");
         divImgInfo.classList.add("divImgInfo");
@@ -236,7 +267,60 @@ pageContent.addEventListener("click", function(event) {
         pageContent.appendChild(divInfoCourse);
     }
 
+    if (event.target.closest(".btnEdit")) {
+        cursosDisponibles = eliminarCurso(IDcurso)
+        localStorage.setItem(
+            "cursosDisponibles",
+            JSON.stringify(cursosDisponibles)
+        );
+        profesores = eliminarCursoAProfesor(dataProfesor.codigo,IDcurso)
+        localStorage.setItem(
+            "profesores",
+            JSON.stringify(profesores)
+        );
+
+        console.log(cursosDisponibles)
+        console.log(profesores)
+
+        divCCF.classList.remove("invi")
+
+        document.getElementById("titulo").value = dataCurso.titulo
+        document.getElementById("descripcion").value = dataCurso.descripcion
+        document.getElementById("temas").value = dataCurso.temasClaves.join(", ")
+        document.getElementById("prerequisitos").value = dataCurso.prerequisitos.join(", ")
+
+        dataCurso.modulos.forEach( m => {
+            modulosContainer.innerHTML += `
+                <div class="moduloCreated">
+                    <span>Modulo ${m.titulo}</span>
+                    <p>${m.contenido}</p>
+                </div>
+            `
+        })
+        
+        document.getElementById("duracion").value = dataCurso.duracion
+        document.getElementById("valor").value = dataCurso.valor
+        document.getElementById("imagen").value = dataCurso.imagen
+        document.getElementById("nivel").value = dataCurso.nivel
+        document.getElementById("categoria").value = dataCategoria.id
+        document.getElementById("profesor").value = dataProfesor.codigo
+    }
+    
+    if (event.target.closest(".btnRemove")) {
+        localStorage.setItem(
+            "cursosDisponibles",
+            JSON.stringify(eliminarCurso(IDcurso))
+        );
+        localStorage.setItem(
+            "profesores",
+            JSON.stringify(eliminarCursoAProfesor(dataProfesor.codigo,IDcurso))
+        );
+        window.location.reload();
+    }
+
 });
+
+
 
 crearCursoForm.addEventListener("submit", function(e) {
     e.preventDefault();
@@ -269,7 +353,7 @@ crearCursoForm.addEventListener("submit", function(e) {
             titulo: formData.get("titulo"),
             descripcion: formData.get("descripcion"),
             imagen: formData.get("imagen"),
-            duracion: Number(formData.get("duracion")) + " semanas",
+            duracion: Number(formData.get("duracion")),
             nivel: formData.get("nivel"),
             prerequisitos: [formData.get("prerequisitos")],
             valor: Number(formData.get("valor")),

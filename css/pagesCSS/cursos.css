@@ -323,6 +323,7 @@
 
     outline: none;
     border: 2px solid #d49d1c;
+    color: var(--colorTextInput);
     border-radius: 5px;
 
     height: 28px;
@@ -356,6 +357,14 @@
     padding: 10px;
     border-radius: 15px;
     background-color: #FFD369;
+}
+
+.divCCF .form-group:nth-child(5) input{
+    background-color: #EEEEEE;
+}
+
+.divCCF .form-group:nth-child(5) label{
+    color: black;
 }
 
 .divCCF .moduloCreated{

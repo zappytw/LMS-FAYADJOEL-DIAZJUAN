@@ -1,4 +1,4 @@
-/*:root{
+:root{
     --bgBody: #ffffff;
     --pColor: #3D3D3D;
     --bgCursoDiv: #EEEEEE;
@@ -11,14 +11,14 @@
     --pColorBtnCrearCurso: #ffffff;
 
     --bgForm: #ffffff;
-    --bdInputForm: #EEEEEE;
+    --bgInputForm: #EEEEEE;
     --colorTextInput: #000000;
 
     --bgBtnCrear: #393E46;
     --colorBtnCrear: #EEEEEE;
-}*/
+}
 
-:root{
+.dark{
     --colorNav: #ffffff;
 
     --bgBody: #393E46;
