@@ -1,4 +1,4 @@
-:root{
+/*:root{
     --bgBody: #ffffff;
     --pColor: #3D3D3D;
     --bgCursoDiv: #EEEEEE;
@@ -12,6 +12,30 @@
 
     --bgForm: #ffffff;
     --bdInputForm: #EEEEEE;
+    --colorTextInput: #000000;
+
+    --bgBtnCrear: #393E46;
+    --colorBtnCrear: #EEEEEE;
+}*/
+
+:root{
+    --colorNav: #ffffff;
+
+    --bgBody: #393E46;
+    --textColor: #EEEEEE;
+
+    --pColor: #acacac;
+    --bgCard: #222831;
+
+    --moduloDiv: #49505A;
+    --spanColor1: #9DAFEC;
+
+    --bgBtnCrearCurso: #EEEEEE;
+    --pColorBtnCrearCurso: #222831;
+
+    --bgForm: #222831;
+    --bgInputForm: #49505A;
+    --colorTextInput: #ffffff;
 
     --bgBtnCrear: #393E46;
     --colorBtnCrear: #EEEEEE;
