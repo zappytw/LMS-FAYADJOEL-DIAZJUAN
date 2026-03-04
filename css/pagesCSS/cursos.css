@@ -1,4 +1,4 @@
-body{background-color: white;}
+body{background-color: var(--bgBody);}
 
 #pageContent{
     display: flex;
@@ -18,7 +18,7 @@ body{background-color: white;}
 }
 
 .divCategoria .desCate{
-    color: #3D3D3D;
+    color: var(--pColor);
     border-bottom: 3px solid #FFD369;
 
     margin-bottom: 20px;
@@ -39,17 +39,17 @@ body{background-color: white;}
 .divCurso{
     position: relative;
 
-    background-color: #EEEEEE;
+    background-color: var(--bgCard);
 
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 
     width: 300px;
 
     border-radius: 20px;
 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.315);
-
 }
 
 .divCurso img{
@@ -59,6 +59,12 @@ body{background-color: white;}
 
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
+
+    transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.divCurso:hover img{
+    transform: scale(1.05);
 }
 
 .spanInfo{
@@ -71,12 +77,14 @@ body{background-color: white;}
 
 .divCurso .level{
     position: absolute;
+    z-index: 1000;
     top: 6px;
     left: 6px;
 }
 
 .divCurso .time{
     position: absolute;
+    z-index: 1000;
     top: 6px;
     right: 6px;
 }
@@ -115,7 +123,7 @@ body{background-color: white;}
 
 .divCurso p{
     font-size: 15px;
-    color: #3D3D3D;
+    color: var(--pColor);
 }
 
 /*-----------ENROLL NOW STYLE-----------*/
@@ -125,8 +133,8 @@ body{background-color: white;}
 #backBtn{
     width: 120px;
     border: none;
-    background-color: #f4f6f8;
-    color: blue;
+    background-color: var(--bgBody);
+    color: var(--btnBackColor);
 }
 
 .divImgInfo{
@@ -184,20 +192,20 @@ body{background-color: white;}
     padding: 20px;
     border-radius: 20px;
 
-    background-color: #EEEEEE;
+    background-color: var(--bgCard);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.315);
 }
 
-.divInfoCourse .card p{color: #3D3D3D;}
+.divInfoCourse .card p{color: var(--pColor);}
 
 .divInfoCourse .card .modulo{
     padding: 10px;
     border-radius: 15px;
-    background-color: #dfdede;
+    background-color: var(--moduloDiv);
 }
 
 .divInfoCourse .card .modulo span:nth-child(1){
-    color: #2446b6;
+    color: var(--spanColor1);
     font-weight: bold;
     margin-right: 10px;
 }
@@ -228,8 +236,8 @@ body{background-color: white;}
     align-items: center;
     gap: 10px;
 
-    background: #222; /*el color del fondo y del texto es algo que puede cambiar*/
-    color: white;
+    background: var(--bgBtnCrearCurso); /*el color del fondo y del texto es algo que puede cambiar*/
+    color: var(--pColorBtnCrearCurso);
     border: none;
     border-radius: 50px;
 
@@ -280,34 +288,106 @@ body{background-color: white;}
 
 .divCCF form{
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 10px;
 
     width: 90vw;
     max-width: 800px;
     padding: 20px;
+    border-radius: 20px;
 
-    background-color: white;
+    background-color: var(--bgForm);
 }
 
 .divCCF .form-group{
     display: flex;
     flex-direction: column;
+    gap: 5px;
     width: 49%;
 }
 
-.divCCF .form-group:nth-child(1){
-    width: 100%;
-    background-color: #2446b6;
+.divCCF input{
+    height: 15px;
+    padding: 7px;
+
+    border-radius: 5px;
+    border: none;
+    outline: none;
+
+    background-color: var(--bdInputForm);
 }
 
-.divCCF .form-group:nth-child(2){
-    width: 100%;
-    background-color: #24b630;
+.divCCF select{
+    appearance: none;
+
+    outline: none;
+    border: 2px solid #d49d1c;
+    border-radius: 5px;
+
+    height: 28px;
+    padding-left: 7px;
+
+    background-color: var(--bdInputForm);
 }
+
+.divCCF .modulosContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+
+    width: 100%;
+}
+
+.divCCF .form-group:nth-child(1){width: 100%;}
+
+.divCCF .form-group:nth-child(2){width: 100%;}
 
 .divCCF .form-group:nth-child(5){
     width: 100%;
-    background-color: #b624b6;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    padding: 10px;
+    border-radius: 15px;
+    background-color: #FFD369;
+}
+
+.divCCF .moduloCreated{
+    display: flex;
+    gap: 10px;
+
+    padding: 10px;
+    border-radius: 10px;
+
+    background-color: #ffc369;
+}
+
+.divCCF .moduloCreated span{
+    font-weight: bold;
+    color: #d41c1c;
+}
+
+.divCCF .form-group .sub-form-group{
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+}
+
+.divCCF button{
+    background-color: var(--bgBtnCrear);
+    color: var(--colorBtnCrear);
+
+    width: 150px;
+    padding: 10px;
+
+    border: none;
+    border-radius: 20px;
 }
 

@@ -1,3 +1,18 @@
 :root{
-    --primary: #fff;
+    --bgBody: #ffffff;
+    --pColor: #3D3D3D;
+    --bgCursoDiv: #EEEEEE;
+    --bgCard: #EEEEEE;
+
+    --moduloDiv: #dfdede;
+    --spanColor1: #2446b6;
+
+    --bgBtnCrearCurso: #000000;
+    --pColorBtnCrearCurso: #ffffff;
+
+    --bgForm: #ffffff;
+    --bdInputForm: #EEEEEE;
+
+    --bgBtnCrear: #393E46;
+    --colorBtnCrear: #EEEEEE;
 }

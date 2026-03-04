@@ -1,5 +1,7 @@
 import { inicializarCursosDisponibles, inicializarProfesores} from "./data.js";
 
+localStorage.clear();
+
 inicializarCursosDisponibles();
 inicializarProfesores()
 const cursosDisponibles = JSON.parse(localStorage.getItem("cursosDisponibles"));
@@ -59,46 +61,76 @@ function showCursosDisponibles(){
     
 }
 
-function añadirSelectCategoriaForm(){
+function añadirSelectCategoriaProfeForm(){
     const btnSubmit = document.getElementById("btnCrearCurso")
-    const select = document.createElement("select");
-    select.id = "categoria"
-    select.name = "categoria";
-    select.required = true;
+    
+    const selectCategoria = document.createElement("select");
+    selectCategoria.id = "categoria"
+    selectCategoria.name = "categoria";
+    selectCategoria.required = true;
 
-    select.innerHTML = `<option value="">Seleccione categoría</option>`;
+    const selectProfe = document.createElement("select");
+    selectProfe.id = "profesor"
+    selectProfe.name = "profesor";
+    selectProfe.required = true;
+
+    selectCategoria.innerHTML = `<option value="">Seleccione Categoría</option>`;
+    selectProfe.innerHTML = `<option value="">Seleccione Docente</option>`;
 
     const categorias = cursosDisponibles.categorias.map(c => c.nombre)
     categorias.forEach((c,index) => {
-        select.innerHTML += `
+        selectCategoria.innerHTML += `
             <option value="${index+1}">${c}</option>
         `;
     })
 
-    const div = document.createElement("div")
-    div.classList.add("form-group")
-    div.innerHTML = '<label for="categoria">Categoria</label>'
-    div.appendChild(select)
-    crearCursoForm.insertBefore(div, btnSubmit);
+    profesores.forEach(p => {
+        selectProfe.innerHTML += `
+            <option value="${p.codigo}">${p.nombres} ${p.apellidos}</option>
+        `;
+    })
+
+    const divCategoria = document.createElement("div")
+    divCategoria.classList.add("form-group")
+    divCategoria.innerHTML = '<label for="categoria">Categoria</label>'
+    divCategoria.appendChild(selectCategoria)
+
+    const divProfe = document.createElement("div")
+    divProfe.classList.add("form-group")
+    divProfe.innerHTML = '<label for="profesor">Docente</label>'
+    divProfe.appendChild(selectProfe)
+    
+    crearCursoForm.insertBefore(divCategoria, btnSubmit);
+    crearCursoForm.insertBefore(divProfe, btnSubmit);
 }
 
 showCursosDisponibles();
-añadirSelectCategoriaForm();
+añadirSelectCategoriaProfeForm();
 
+//aparecer el formulario
 btnCrearForm.addEventListener("click",()=>{
     divCCF.classList.remove("invi")
 })
 
+//desaparecer el formulario
+divCCF.addEventListener("click",function(e){
+    if (e.target === divCCF){
+        divCCF.classList.add("invi")
+    }
+})
+
 crearModuloBtn.addEventListener("click",()=>{
-    let moduloTitulo = document.getElementById("moduloTitulo").value
-    let moduloContenido = document.getElementById("moduloContenido").value
+    const moduloTitulo = document.getElementById("moduloTitulo")
+    const moduloContenido = document.getElementById("moduloContenido")
 
     modulosContainer.innerHTML += `
         <div class="moduloCreated">
-            <span>modulo ${moduloTitulo}</span>
-            <p>${moduloContenido}</p>
+            <span>Modulo ${moduloTitulo.value}</span>
+            <p>${moduloContenido.value}</p>
         </div>
     `
+    moduloTitulo.value = ""
+    moduloContenido.value = ""
 })
 
 pageContent.addEventListener("click", function(event) {
@@ -236,18 +268,27 @@ crearCursoForm.addEventListener("submit", function(e) {
             id: IDcurso,
             titulo: formData.get("titulo"),
             descripcion: formData.get("descripcion"),
-            //todavia no lo hemos solucionado
-            imagen: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4",
-            duracion: Number(formData.get("duracion")),
+            imagen: formData.get("imagen"),
+            duracion: Number(formData.get("duracion")) + " semanas",
             nivel: formData.get("nivel"),
             prerequisitos: [formData.get("prerequisitos")],
             valor: Number(formData.get("valor")),
             temasClaves: arrayTemas,
             modulos: arrayModulos
         }
-
+    
     let cursosDisponiblesNuevo = cursosDisponibles
     cursosDisponiblesNuevo.categorias[IDcategoria-1].cursos.push(dataCurso)
+
+    const codigoProfesor = formData.get("profesor")
+    let profesoresNuevo = profesores
+    profesoresNuevo
+        .find(p => p.codigo === codigoProfesor)
+        .cursos.push({categoriaId: IDcategoria, cursoId: IDcurso})
+    
+    
     localStorage.setItem("cursosDisponibles", JSON.stringify(cursosDisponiblesNuevo));
+    localStorage.setItem("profesores", JSON.stringify(profesoresNuevo));
+    window.location.reload();
 });
 

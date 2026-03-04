@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LMS | cursos</title>
 
-    <link rel="stylesheet" href="../css/pagesCSS/cursos.css">
+    <link rel="stylesheet" href="../css/vars.css">
     <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/pagesCSS/cursos.css">
 
     <!--FONTS-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -67,15 +68,27 @@
             </div>
             <div class="form-group">
                 <div id="modulosContainer" class="modulosContainer"></div>
-                <label for="moduloTitulo">Titulo</label>
-                <input name="moduloTitulo" id="moduloTitulo" type="text" placeholder="ingrese le titulo del modulo">
-                <label for="moduloContenido">Contenido</label>
-                <input name="moduloContenido" id="moduloContenido" type="text" placeholder="ingrese le contenido del modulo">
+                <div class="sub-form-group">
+                    <label for="moduloTitulo">Titulo</label>
+                    <input name="moduloTitulo" id="moduloTitulo" type="text" placeholder="ingrese le titulo del modulo">
+                </div>
+                <div class="sub-form-group">
+                    <label for="moduloContenido">Contenido</label>
+                    <input name="moduloContenido" id="moduloContenido" type="text" placeholder="ingrese le contenido del modulo">
+                </div>
                 <button id="crearModuloBtn" type="button">Crear Modulo</button>
             </div>
             <div class="form-group">
                 <label for="duracion">Duracion</label>
                 <input name="duracion" id="duracion" type="number" placeholder="Ingrese el numero de semanas">
+            </div>
+            <div class="form-group">
+                <label for="valor">Valor</label>
+                <input name="valor" id="valor" type="number" placeholder="Ingrese el valor del curso">
+            </div>
+            <div class="form-group">
+                <label for="imagen">Imagen</label>
+                <input name="imagen" id="imagen" type="text" placeholder="pege aqui el link de su imagen">
             </div>
             <div class="form-group">
                 <label for="nivel">Nivel</label>
@@ -84,10 +97,6 @@
                     <option value="intermedio">Intermedio</option>
                     <option value="avansado">Avansado</option>
                 </select>
-            </div>
-            <div class="form-group">
-                <label for="valor">Valor</label>
-                <input name="valor" id="valor" type="number" placeholder="Ingrese el valor del curso">
             </div>
             <button id="btnCrearCurso" type="submit">Crear</button>
         </form>
