@@ -21,30 +21,83 @@
 </head>
 <body>
     <nav>
-    <p class="logo">ABC</p>
-    <div class="navMenu">
-        <a href="../index.html">Dashboard</a>
-        <a href="cursos.html">Cursos</a>
-        <a href="docentes.html">Docentes</a>
-        <a href="">Administrativos</a>
-    </div>
-    <div class="profileDiv">
-        <button class="themeBtn">
-            <img src="../media/sun.png" alt="">
-        </button>
-        <button class="profileBtn">
-            <img src="../media/profilePlaceholder.png" alt="">
-            <p>Pepito Perez</p>
-            <i class="fa-solid fa-sort-down"></i>
-        </button>
-    </div>
+        <p class="logo">ABC</p>
+        <div class="navMenu">
+            <a href="../index.html">Dashboard</a>
+            <a href="cursos.html">Cursos</a>
+            <a href="docentes.html">Docentes</a>
+            <a href="">Administrativos</a>
+        </div>
+        <div class="profileDiv">
+            <button class="themeBtn">
+                <img src="../media/sun.png" alt="">
+            </button>
+            <button class="profileBtn">
+                <img src="../media/profilePlaceholder.png" alt="">
+                <p>Pepito Perez</p>
+                <i class="fa-solid fa-sort-down"></i>
+            </button>
+        </div>
     </nav>
+
     <main>
         <header>
             <h1 class="pageTitle">Available Courses</h1>
         </header>
         <div id="pageContent"></div>
     </main>
+
+    <div class="divCCF invi" id="divCCF">
+        <form id="createCursoForm" action="#">
+            <div class="form-group">
+                <label for="titulo">Titulo</label>
+                <input name="titulo" id="titulo" type="text" placeholder="Ingrese el titulo del curso">
+            </div>
+            <div class="form-group">
+                <label for="descripcion">Descripcion</label>
+                <input name="descripcion" id="descripcion" type="text" placeholder="Ingrese la descripcion del curso">
+            </div>
+            <div class="form-group">
+                <label for="temas">Temas</label>
+                <input name="temas" id="temas" type="text" placeholder="nombra los temas claves y separalos con comas">
+            </div>
+            <div class="form-group">
+                <label for="prerequisitos">Prerequisitos</label>
+                <input name="prerequisitos" id="prerequisitos" type="text" placeholder="Ingrese los prerequisitos del curso">
+            </div>
+            <div class="form-group">
+                <div id="modulosContainer" class="modulosContainer"></div>
+                <label for="moduloTitulo">Titulo</label>
+                <input name="moduloTitulo" id="moduloTitulo" type="text" placeholder="ingrese le titulo del modulo">
+                <label for="moduloContenido">Contenido</label>
+                <input name="moduloContenido" id="moduloContenido" type="text" placeholder="ingrese le contenido del modulo">
+                <button id="crearModuloBtn" type="button">Crear Modulo</button>
+            </div>
+            <div class="form-group">
+                <label for="duracion">Duracion</label>
+                <input name="duracion" id="duracion" type="number" placeholder="Ingrese el numero de semanas">
+            </div>
+            <div class="form-group">
+                <label for="nivel">Nivel</label>
+                <select name="nivel" id="nivel">
+                    <option value="principiante">Principiante</option>
+                    <option value="intermedio">Intermedio</option>
+                    <option value="avansado">Avansado</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="valor">Valor</label>
+                <input name="valor" id="valor" type="number" placeholder="Ingrese el valor del curso">
+            </div>
+            <button id="btnCrearCurso" type="submit">Crear</button>
+        </form>
+    </div>
+
+    <button id="btmCrear" class="btnCrearCurso">
+        <i class="fa-solid fa-plus"></i>
+        <span class="textBtn">Crear Curso</span>
+    </button>
+    
 </body>
 <script type="module" src="../utils/cursos.js"></script>
 </html>

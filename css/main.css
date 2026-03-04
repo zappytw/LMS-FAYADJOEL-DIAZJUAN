@@ -131,3 +131,10 @@ nav a:active{
     align-items: center;
     transition: ease 0.4s;
 }
+
+/*CLASES IMPORTENTES*/
+
+.invi{
+    opacity: 0;
+    pointer-events: none;
+}

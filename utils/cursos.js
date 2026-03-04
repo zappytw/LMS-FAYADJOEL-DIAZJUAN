@@ -6,6 +6,12 @@ const cursosDisponibles = JSON.parse(localStorage.getItem("cursosDisponibles"));
 const profesores = JSON.parse(localStorage.getItem("profesores"));
 
 const pageContent = document.getElementById("pageContent")
+const btnCrearForm = document.getElementById("btmCrear")
+
+const divCCF = document.getElementById("divCCF")
+const crearCursoForm = document.getElementById("createCursoForm")
+const crearModuloBtn = document.getElementById("crearModuloBtn")
+const modulosContainer = document.getElementById("modulosContainer")
 
 function showCursosDisponibles(){
     window.scrollTo({
@@ -53,7 +59,47 @@ function showCursosDisponibles(){
     
 }
 
+function añadirSelectCategoriaForm(){
+    const btnSubmit = document.getElementById("btnCrearCurso")
+    const select = document.createElement("select");
+    select.id = "categoria"
+    select.name = "categoria";
+    select.required = true;
+
+    select.innerHTML = `<option value="">Seleccione categoría</option>`;
+
+    const categorias = cursosDisponibles.categorias.map(c => c.nombre)
+    categorias.forEach((c,index) => {
+        select.innerHTML += `
+            <option value="${index+1}">${c}</option>
+        `;
+    })
+
+    const div = document.createElement("div")
+    div.classList.add("form-group")
+    div.innerHTML = '<label for="categoria">Categoria</label>'
+    div.appendChild(select)
+    crearCursoForm.insertBefore(div, btnSubmit);
+}
+
 showCursosDisponibles();
+añadirSelectCategoriaForm();
+
+btnCrearForm.addEventListener("click",()=>{
+    divCCF.classList.remove("invi")
+})
+
+crearModuloBtn.addEventListener("click",()=>{
+    let moduloTitulo = document.getElementById("moduloTitulo").value
+    let moduloContenido = document.getElementById("moduloContenido").value
+
+    modulosContainer.innerHTML += `
+        <div class="moduloCreated">
+            <span>modulo ${moduloTitulo}</span>
+            <p>${moduloContenido}</p>
+        </div>
+    `
+})
 
 pageContent.addEventListener("click", function(event) {
     
@@ -158,5 +204,50 @@ pageContent.addEventListener("click", function(event) {
         pageContent.appendChild(divInfoCourse);
     }
 
+});
+
+crearCursoForm.addEventListener("submit", function(e) {
+    e.preventDefault();
+    const formData = new FormData(crearCursoForm);
+
+    const arrayTemas = formData.get("temas")
+        .split(",")
+        .map(tema => tema.trim());
+
+    const modulos = document.querySelectorAll(".moduloCreated")
+    const arrayModulos = []
+    modulos.forEach((modulo,index) => {
+        const titulo = modulo.querySelector("span").textContent;
+        const contenido = modulo.querySelector("p").textContent;
+
+        const moduloNuevo = {
+            numero:(index + 1),
+            titulo:titulo,
+            contenido:contenido 
+        }
+        arrayModulos.push(moduloNuevo)
+    });
+
+    const IDcategoria = Number(formData.get("categoria"))
+    const dataCategoria = cursosDisponibles.categorias.find(c => c.id === IDcategoria)
+    const IDcurso = (IDcategoria * 100)+(dataCategoria.cursos.length + 1)
+
+    const dataCurso = {
+            id: IDcurso,
+            titulo: formData.get("titulo"),
+            descripcion: formData.get("descripcion"),
+            //todavia no lo hemos solucionado
+            imagen: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4",
+            duracion: Number(formData.get("duracion")),
+            nivel: formData.get("nivel"),
+            prerequisitos: [formData.get("prerequisitos")],
+            valor: Number(formData.get("valor")),
+            temasClaves: arrayTemas,
+            modulos: arrayModulos
+        }
+
+    let cursosDisponiblesNuevo = cursosDisponibles
+    cursosDisponiblesNuevo.categorias[IDcategoria-1].cursos.push(dataCurso)
+    localStorage.setItem("cursosDisponibles", JSON.stringify(cursosDisponiblesNuevo));
 });
 
