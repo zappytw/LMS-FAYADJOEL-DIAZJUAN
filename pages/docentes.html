@@ -17,62 +17,54 @@
     <link rel="stylesheet" href="../css/vars.css">
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/pagesCSS/docentes.css">
-    <!--FAVICON-->
-    <link rel="icon" href="../media/favicon_io/favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="../media/favicon_io/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../media/favicon_io/favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="../media/favicon_io/apple-touch-icon.png">
-    <link rel="manifest" href="../media/favicon_io/site.webmanifest">
 </head>
 <body>
     <nav>
-        <div class="logoDiv">
-            <p class="logo">ABC</p>
-            <div class="DesplegableMenu">
-                <a href="./dashBoard.html">Dashboard</a>
-                <a href="./cursos.html">Cursos</a>
-                <a href="./docentes.html">Docentes</a>
-                <a href="./administradores.html">Administrativos</a>
-            </div>
-        </div>
+        <p class="logo">ABC</p>
         <div class="navMenu">
             <a href="./dashBoard.html">Dashboard</a>
             <a href="./cursos.html">Cursos</a>
             <a href="./docentes.html">Docentes</a>
-            <a href="./administradores.html">Administrativos</a>
+            <a href="">Administrativos</a>
         </div>
         <div class="profileDiv">
             <button id="themeBtn" class="themeBtn">
-                <img src="../media/moon.png" alt="">
+                <img src="../media/sun.png" alt="">
             </button>
             <button class="profileBtn">
                 <img src="../media/profilePlaceholder.png" alt="">
-                <div class="userName">Pepito Perez</di>
+                <div class="userName">Pepito Perez</div>
                 <i class="fa-solid fa-sort-down"></i>
             </button>
         </div>
-    </nav>
-    <main>
-        <header>
-            <h1 class="pageTitle">Docentes</h1>
-        </header>
-        <form id="searchForm">
-            <input type="text" name="" id="searchInput" placeholder="Buscar">
-            <select name="" id="searchSelect" placeholder="aa">
-                <option value="">Todas las Áreas</option>
-            </select>
-            <button id="searchBtn">Buscar</button>
-        </form>
-        <div id="tableDiv">
-            <div class="tableHeaderDiv">
-                <div>Nombre</div>
-                <div>Còdigo</div>
-                <div>Email</div>
-                <div>Àrea</div>
-                <div></div>
+        </nav>
+        <main>
+            <header>
+                <h1 class="pageTitle">Docentes</h1>
+            </header>
+            <div class="searchAddDiv">
+                <form id="searchForm">
+                    <input type="text" name="" id="searchInput" placeholder="Buscar">
+                    <select name="" id="searchSelect">
+                        <option value="">Todas las Áreas</option>
+                    </select>
+                    <button id="searchBtn">Buscar</button>
+                </form>
+                <button class="btn addBtn" id="addBtn"><i class="fa-solid fa-plus"></i>
+                <span>Nuevo docente</span></button>
             </div>
-        </div>
-    </main>
+            
+
+            <div id="tableDiv">
+                <div class="tableHeaderDiv">
+                    <div>Nombre</div>
+                    <div>Còdigo</div>
+                    <div>Email</div>
+                    <div>Àrea</div>
+                    <div></div>
+                </div>
+            </div>
+        </main>
     <div id="overlay" class="hidden hide-scrollbar">
         <div id="bigProfesorDiv" class="hidden">
             <div class="persInfoDiv">

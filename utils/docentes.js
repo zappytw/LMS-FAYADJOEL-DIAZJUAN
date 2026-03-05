@@ -289,4 +289,3 @@ areasEditProfesorForm.addEventListener("submit",async (e)=>{
 
 }
 })
-
