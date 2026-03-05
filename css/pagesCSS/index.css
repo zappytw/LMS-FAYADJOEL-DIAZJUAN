@@ -59,6 +59,28 @@ button{
     background-color: #FFD369;
 }
 
+.loginForm a{
+    text-decoration: none;
+    color: #002a68;
+}
+
+.loginOpts{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.loginOpts img{
+    cursor: pointer;
+    width: 25px;
+    border-radius: 100%;
+}
+
+.loginForm img:nth-child(3){
+    width: 28px;
+}
+
 /*mensaje de error*/
 
 .mensajError{
