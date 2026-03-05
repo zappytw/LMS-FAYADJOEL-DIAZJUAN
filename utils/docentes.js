@@ -13,6 +13,11 @@ const overlay = document.getElementById("overlay")
 const coursesDiv = document.getElementById("coursesDiv")
 const areaAcademicaSelect =document.getElementById("areaAcademicaSelect")
 const editProfesorForm = document.getElementById("editProfesorForm")
+
+const popup = document.getElementById("popup")
+const okBtn = document.getElementById("okBtn")
+const notBtn = document.getElementById("notBtn")
+const popupText = document.getElementById("popupText")
 //Datos de profesor individual
 const persInfoName = document.getElementById("persInfoName")
 const persInfoImg = document.getElementById("persInfoImg")
@@ -119,7 +124,7 @@ function mostrarCursos(cursos, cursosProfesor=[]){
         <input type=checkbox class="cursoCheckbox" name="curso" value=${curso.id} ${checked}>
         `
     coursesDiv.append(cursoDiv)
-    })  
+    }) 
 }
 // EDITAR PROFESOR
 function editProfesor(editBtn){
@@ -174,6 +179,10 @@ document.addEventListener("keydown",(e)=>{
         cerrarEdit()
     }
 })
+
+function deleteProfesor(deleteBtn){
+    
+}
 tableDiv.addEventListener("click", (e)=>{
     const editBtn = e.target.closest(".editBtn");
     const deleteBtn = e.target.closest(".deleteBtn");
@@ -181,31 +190,37 @@ tableDiv.addEventListener("click", (e)=>{
         editProfesor(editBtn)
     }
     if(deleteBtn){
-    console.log("ELIMINAR" + deleteBtn.dataset.id)
+        deleteProfesor(deleteBtn)
     }
 })
-/*editProfesorForm.addEventListener("submit",(e)=>{
-    e.preventDefault()
-
-    const formData = new FormData(e.target)
-
-    const area = formData.get("area") // si tu select tiene name="area"
-    const cursos = formData.getAll("curso") // IMPORTANTE: getAll
-
-    console.log(area)
-    console.log(cursos)
-
-
-    cerrarEdit()
-})
-    */
-function capitalizar(string) { //funcion que hice porque el value de area del form para editar
-    //estaba toda en minuscula
+function capitalizar(string) { //funcion que hice porque el value de area del form para editar-
+    //-estaba toda en minuscula
     if (string.length === 0) return "";
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
-editProfesorForm.addEventListener("submit",(e)=>{
+
+async function popupConfirm(message) {
+    popup.classList.remove("hidden")
+    popupText.textContent=message
+    return new Promise((resolve) => {
+        const closePopup = (value) => {
+            popup.classList.add("hidden");
+            okBtn.removeEventListener("click", proceed);
+            notBtn.removeEventListener("click", cancel);
+            resolve(value);
+        };
+
+        const proceed = () => closePopup(true);
+        const cancel = () => closePopup(false);
+
+        okBtn.addEventListener("click", proceed);
+        notBtn.addEventListener("click", cancel);
+    });
+}
+editProfesorForm.addEventListener("submit",async (e)=>{
     e.preventDefault()
+    if (await popupConfirm("Quieres confirmar y guardar los cambios realizados?")){
+    
 //AGARRAR DATOS DEL FORM
     const formData = new FormData(e.target)
     const nuevosCursos = formData.getAll("curso")
@@ -228,6 +243,9 @@ editProfesorForm.addEventListener("submit",(e)=>{
     }
 //FINALMENTE, RECARGAR LA PAGINA PARA APLICAR CAMBIOS
     window.location.href="docentes.html"
+} else {
+    cerrarEdit
+}
 })
 const themeBtn = document.querySelector(".themeBtn img");
 
