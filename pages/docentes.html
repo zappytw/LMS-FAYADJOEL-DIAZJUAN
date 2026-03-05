@@ -6,6 +6,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/pagesCSS/docentes.css">
+    <link rel="stylesheet" href="../css/vars.css">
 
     <!--FONTS-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -59,7 +60,7 @@
                 </div>
             </div>
         </main>
-    <div id="overlay" class="hidden">
+    <div id="overlay" class="hidden hide-scrollbar">
         <div id="bigProfesorDiv" class="hidden">
             <div class="persInfoDiv">
                 <div class="profesorProfile">
@@ -82,7 +83,17 @@
                     </div>
                 </dl>
             </div>
+            <hr>
             <div class="otherDiv">
+                <form action="" id="editProfesorForm">
+                    <div class="dt">Área académica</div>
+                    <select name="area" id="areaAcademicaSelect" class="dd"></select>
+
+                    <div class="dt">Cursos</div>
+                    <div id="coursesDiv">
+                    </div>
+                    <button class="btn submitProfesor">Guardar Cambios</button>
+                </form>
             </div>
         </div>
     </div>

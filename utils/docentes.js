@@ -1,14 +1,18 @@
-import{inicializarProfesores} from "./data.js"
+import{inicializarProfesores, inicializarCursosDisponibles} from "./data.js"
 inicializarProfesores();
+inicializarCursosDisponibles();
 
 const tableDiv = document.getElementById("tableDiv")
 const profesoresData = JSON.parse(localStorage.getItem("profesores"))
+const cursosData = JSON.parse(localStorage.getItem("cursosDisponibles"))
 const searchForm = document.getElementById("searchForm")
 const searchInput = document.getElementById("searchInput")
 const searchSelect = document.getElementById("searchSelect")
 const editProfesorDiv = document.getElementById("bigProfesorDiv")
 const overlay = document.getElementById("overlay")
-
+const coursesDiv = document.getElementById("coursesDiv")
+const areaAcademicaSelect =document.getElementById("areaAcademicaSelect")
+const editProfesorForm = document.getElementById("editProfesorForm")
 //Datos de profesor individual
 const persInfoName = document.getElementById("persInfoName")
 const persInfoImg = document.getElementById("persInfoImg")
@@ -68,35 +72,93 @@ searchForm.addEventListener("submit",(event)=>{
 
 //==Carga inicial==
 mostrarProfesores(profesoresData)
-let areas = [];
-    profesoresData.forEach(profesor => {
-        if(areas.includes(profesor.areaAcademica) === false){
-            areas.push(profesor.areaAcademica)
+
+function cargarAreasSelect(select){
+    let areas = [];
+    cursosData.categorias.forEach(curso => {
+        if(areas.includes(curso.nombre) === false){
+            areas.push(curso.nombre)
         }
     })
     areas.forEach(area => {
         let areaOpt = document.createElement("option")
         areaOpt.value=area.toLowerCase()
         areaOpt.innerHTML=area
-        searchSelect.append(areaOpt)
+        select.append(areaOpt)
     })
+}
+cargarAreasSelect(searchSelect);
+//===============
 
+function cargarCursos(areaAcademica){
+    let objetoArea = cursosData.categorias.find(area =>
+        area.nombre.toLowerCase() === areaAcademica.toLowerCase()
+    );
 
+    if(!objetoArea){
+        console.log("No se encontró la categoría");
+        return [];
+    }
+
+    return objetoArea.cursos;
+}
+function mostrarCursos(cursos, cursosProfesor=[]){
+    coursesDiv.innerHTML=""
+    let idCursosProfesor = []
+    cursosProfesor.forEach(curso => {
+        idCursosProfesor.push(curso.cursoId)
+        }
+    )
+    cursos.forEach(curso => {
+        let cursoDiv = document.createElement("div")
+        cursoDiv.classList.add("cursoDiv")
+        let checked = idCursosProfesor.includes(curso.id) ? "checked" : ""
+        cursoDiv.innerHTML=`
+        <div>${curso.titulo}</div>
+        <div>${curso.id}</div>
+        <input type=checkbox class="cursoCheckbox" name="curso" value=${curso.id} ${checked}>
+        `
+    coursesDiv.append(cursoDiv)
+    })  
+}
+// EDITAR PROFESOR
 function editProfesor(editBtn){
-    console.log("EDITAR"+editBtn.dataset.id)
-    let profesorData = buscarProfesores(editBtn.dataset.id)
-    console.log(profesorData)
+
+    //EDITAR AREA ACADEMICA
+    let cursosProfesor=buscarProfesores(editBtn.dataset.id)[0].cursos
+    let areaAcademica=buscarProfesores(editBtn.dataset.id)[0].areaAcademica
+    areaAcademicaSelect.innerHTML=""
+    cargarAreasSelect(areaAcademicaSelect);
+    areaAcademicaSelect.value = areaAcademica.toLowerCase()
+    //=====================
+    //EDITAR CURSOS
+    coursesDiv.innerHTML=""
+    mostrarCursos(cargarCursos(areaAcademicaSelect.value),cursosProfesor)
+    //=====================
+    //DATOS DEL PROFESOR
+        let profesorData = buscarProfesores(editBtn.dataset.id)
+    //=====================
+
+    overlay.scrollTop=0 //RESET SCROLLBAR
+
+    //MOSTRAR EL MODAL
     editProfesorDiv.classList.remove("hidden")
     overlay.classList.remove("hidden")
     document.body.style.overflow =  "hidden";
+    //====================
 
+    //CARGAR INFO PROFESOR
     persInfoImg.src=profesorData[0].fotoUrl
     persInfoName.textContent=profesorData[0].nombres + " " + profesorData[0].apellidos
     persInfoDocument.textContent=profesorData[0].identificacion
     persInfoEmail.textContent=profesorData[0].email
     persInfoId.textContent=profesorData[0].codigo
-
+    //======================
 }
+areaAcademicaSelect.addEventListener("change",()=>{
+    mostrarCursos(cargarCursos(areaAcademicaSelect.value))
+})
+//=============
 function cerrarEdit(){
     editProfesorDiv.classList.add("hidden")
     overlay.classList.add("hidden")
@@ -122,4 +184,73 @@ tableDiv.addEventListener("click", (e)=>{
     console.log("ELIMINAR" + deleteBtn.dataset.id)
     }
 })
+/*editProfesorForm.addEventListener("submit",(e)=>{
+    e.preventDefault()
 
+    const formData = new FormData(e.target)
+
+    const area = formData.get("area") // si tu select tiene name="area"
+    const cursos = formData.getAll("curso") // IMPORTANTE: getAll
+
+    console.log(area)
+    console.log(cursos)
+
+
+    cerrarEdit()
+})
+    */
+function capitalizar(string) { //funcion que hice porque el value de area del form para editar
+    //estaba toda en minuscula
+    if (string.length === 0) return "";
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+editProfesorForm.addEventListener("submit",(e)=>{
+    e.preventDefault()
+//AGARRAR DATOS DEL FORM
+    const formData = new FormData(e.target)
+    const nuevosCursos = formData.getAll("curso")
+    const nuevaArea = formData.get("area")
+//AGARRAR DATOS DEL DOM
+    const id = persInfoId.textContent
+
+    let profesores = JSON.parse(localStorage.getItem("profesores"))
+//BUSCAR AL PROFESOR EN LA LISTA DE LOCALSTORAGE
+    const index = profesores.findIndex(p => p.codigo === id)
+    if(index !== -1){
+        //VERIFICAR QUE EXISTA
+        profesores[index].areaAcademica = capitalizar(nuevaArea)
+
+        profesores[index].cursos = nuevosCursos.map(cursoId => ({
+            categoriaId: Number(cursoId[0]),
+            cursoId: Number(cursoId)
+        }))
+        localStorage.setItem("profesores", JSON.stringify(profesores))
+    }
+//FINALMENTE, RECARGAR LA PAGINA PARA APLICAR CAMBIOS
+    window.location.href="docentes.html"
+})
+const themeBtn = document.querySelector(".themeBtn img");
+
+function toggleTheme(){
+    document.documentElement.classList.toggle("dark-theme");
+
+    const isDark = document.documentElement.classList.contains("dark-theme");
+
+    if(isDark){
+        themeBtn.src = "../media/moon.png";
+        localStorage.setItem("theme","dark");
+    }else{
+        themeBtn.src = "../media/sun.png";
+        localStorage.setItem("theme","light");
+    }
+}
+
+document.querySelector(".themeBtn").addEventListener("click", toggleTheme);
+
+// Cargar tema guardado
+const savedTheme = localStorage.getItem("theme");
+
+if(savedTheme === "dark"){
+    document.documentElement.classList.add("dark-theme");
+    themeBtn.src = "../media/moon.png";
+}

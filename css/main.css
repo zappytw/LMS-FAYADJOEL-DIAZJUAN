@@ -22,6 +22,7 @@ body {
 }
 
 main{
+    background-color: var(--bgBody);
     width: auto;
     display: flex;
     flex-direction: column;
@@ -69,7 +70,7 @@ nav{
 }
 nav a{
     text-decoration: none;
-    color: var(--colorNav);
+    color: white;
     font-family: "arial", sans-serif;
     font-weight: bold;
     padding: 10px;
@@ -162,7 +163,8 @@ nav a:active{
     overflow-y: auto;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
 }
-/**/
+
+
 

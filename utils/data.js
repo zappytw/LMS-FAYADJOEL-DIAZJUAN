@@ -256,7 +256,7 @@ const profesores = [
     apellidos: "Gómez Martínez",
     email: "laura.gomez@lmsacademy.com",
     fotoUrl: "https://randomuser.me/api/portraits/women/45.jpg",
-    areaAcademica: "Biología",
+    areaAcademica: "Ciencias",
     cursos: [
       { categoriaId: 2, cursoId: 201 }
     ]
@@ -269,7 +269,7 @@ const profesores = [
     apellidos: "Ramírez Torres",
     email: "carlos.ramirez@lmsacademy.com",
     fotoUrl: "https://randomuser.me/api/portraits/men/32.jpg",
-    areaAcademica: "Informática",
+    areaAcademica: "Programación",
     cursos: [
       { categoriaId: 1, cursoId: 101 },
       { categoriaId: 1, cursoId: 102 }
@@ -283,7 +283,7 @@ const profesores = [
     apellidos: "López Herrera",
     email: "mariana.lopez@lmsacademy.com",
     fotoUrl: "https://randomuser.me/api/portraits/women/12.jpg",
-    areaAcademica: "Matemáticas",
+    areaAcademica: "Ciencias",
     cursos: [
       { categoriaId: 2, cursoId: 203 }
     ]
@@ -296,7 +296,7 @@ const profesores = [
     apellidos: "Castro Díaz",
     email: "andres.castro@lmsacademy.com",
     fotoUrl: "https://randomuser.me/api/portraits/men/41.jpg",
-    areaAcademica: "Física",
+    areaAcademica: "Ciencias",
     cursos: [
       { categoriaId: 2, cursoId: 202 }
     ]
@@ -309,7 +309,7 @@ const profesores = [
     apellidos: "Morales Ríos",
     email: "valentina.morales@lmsacademy.com",
     fotoUrl: "https://randomuser.me/api/portraits/women/68.jpg",
-    areaAcademica: "Química",
+    areaAcademica: "Programación",
     cursos: [
       { categoriaId: 1, cursoId: 103 }
     ]
@@ -322,7 +322,7 @@ const profesores = [
     apellidos: "Vargas Peña",
     email: "sebastian.vargas@lmsacademy.com",
     fotoUrl: "https://randomuser.me/api/portraits/men/55.jpg",
-    areaAcademica: "Historia",
+    areaAcademica: "Arte",
     cursos: [
       { categoriaId: 3, cursoId: 301 }
     ]
@@ -335,7 +335,7 @@ const profesores = [
     apellidos: "Ortega Ruiz",
     email: "daniela.ortega@lmsacademy.com",
     fotoUrl: "https://randomuser.me/api/portraits/women/27.jpg",
-    areaAcademica: "Lengua Castellana",
+    areaAcademica: "Arte",
     cursos: [
       { categoriaId: 3, cursoId: 302 }
     ]
@@ -348,7 +348,7 @@ const profesores = [
     apellidos: "Pérez Salazar",
     email: "juan.perez@lmsacademy.com",
     fotoUrl: "https://randomuser.me/api/portraits/men/18.jpg",
-    areaAcademica: "Educación Física",
+    areaAcademica: "Arte",
     cursos: [
       { categoriaId: 3, cursoId: 303 }
     ]
@@ -361,7 +361,7 @@ const profesores = [
     apellidos: "Navarro Silva",
     email: "camila.navarro@lmsacademy.com",
     fotoUrl: "https://randomuser.me/api/portraits/women/33.jpg",
-    areaAcademica: "Inglés",
+    areaAcademica: "Negocios",
     cursos: [
       { categoriaId: 4, cursoId: 401 }
     ]
@@ -374,7 +374,7 @@ const profesores = [
     apellidos: "Rojas Méndez",
     email: "miguel.rojas@lmsacademy.com",
     fotoUrl: "https://randomuser.me/api/portraits/men/60.jpg",
-    areaAcademica: "Filosofía",
+    areaAcademica: "Negocios",
     cursos: [
       { categoriaId: 4, cursoId: 402 },
       { categoriaId: 4, cursoId: 403 }

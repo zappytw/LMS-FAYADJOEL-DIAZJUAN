@@ -1,42 +1,42 @@
-/*:root{
-    --bgBody: #ffffff;
-    --pColor: #3D3D3D;
-    --bgCursoDiv: #EEEEEE;
-    --bgCard: #EEEEEE;
+    :root{
+        --bgBody: #ffffff;
+        --pColor: #3D3D3D;
+        --bgCursoDiv: #EEEEEE;
+        --bgCard: #EEEEEE;
 
-    --moduloDiv: #dfdede;
-    --spanColor1: #2446b6;
+        --moduloDiv: #dfdede;
+        --spanColor1: #2446b6;
 
-    --bgBtnCrearCurso: #000000;
-    --pColorBtnCrearCurso: #ffffff;
+        --bgBtnCrearCurso: #000000;
+        --pColorBtnCrearCurso: #ffffff;
 
-    --bgForm: #ffffff;
-    --bdInputForm: #EEEEEE;
-    --colorTextInput: #000000;
+        --bgForm: #ffffff;
+        --bdInputForm: #EEEEEE;
+        --colorTextInput: #000000;
 
-    --bgBtnCrear: #393E46;
-    --colorBtnCrear: #EEEEEE;
-}*/
+        --bgBtnCrear: #393E46;
+        --colorBtnCrear: #EEEEEE;
+    }
 
-:root{
-    --colorNav: #ffffff;
+    .dark-theme{
+        --colorNav: #ffffff;
 
-    --bgBody: #393E46;
-    --textColor: #EEEEEE;
+        --bgBody: #393E46;
+        --textColor: #EEEEEE;
 
-    --pColor: #acacac;
-    --bgCard: #222831;
+        --pColor: #acacac;
+        --bgCard: #222831;
 
-    --moduloDiv: #49505A;
-    --spanColor1: #9DAFEC;
+        --moduloDiv: #49505A;
+        --spanColor1: #9DAFEC;
 
-    --bgBtnCrearCurso: #EEEEEE;
-    --pColorBtnCrearCurso: #222831;
+        --bgBtnCrearCurso: #EEEEEE;
+        --pColorBtnCrearCurso: #222831;
 
-    --bgForm: #222831;
-    --bgInputForm: #49505A;
-    --colorTextInput: #ffffff;
+        --bgForm: #222831;
+        --bgInputForm: #49505A;
+        --colorTextInput: #ffffff;
 
-    --bgBtnCrear: #393E46;
-    --colorBtnCrear: #EEEEEE;
-}
+        --bgBtnCrear: #393E46;
+        --colorBtnCrear: #EEEEEE;
+    }
