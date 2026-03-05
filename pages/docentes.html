@@ -67,26 +67,29 @@
         </main>
     <div id="overlay" class="hidden hide-scrollbar">
         <div id="bigProfesorDiv" class="hidden">
+            <form class="persInfo" id="persInfoForm">
             <div class="persInfoDiv">
                 <div class="profesorProfile">
                 <img class="profesorInfoImg" id="persInfoImg" src="../media/profilePlaceholder.png" alt="">
-                <div id="persInfoName">Cargando...</div>
+                <div>
+                    <input id="persInfoName" class="dd" placeholder="Nombres" oninput="this.style.width = (this.value.length + 1) + 'ch'" maxlength="23" minlength="5"></input>
+                    <input id="persInfoLastName" class="dd" placeholder="Apellidos" oninput="this.style.width = (this.value.length + 1) + 'ch'" maxlength="23" minlength="5"></input>
+                </div>
                 </div>
                 <hr>
-                <dl class="persInfo">
                     <div>
-                        <dt>Nº Documento</dt>
-                        <input id="persInfoDocument"class="dd" disabled value="si lees"></input>
+                        <div class="dt">Nº Documento</div>
+                        <input id="persInfoDocument"class="dd" disabled placeholder="Número de documento" name="document" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></input>
                     </div>
                     <div>
-                        <dt>Correo Electrónico</dt>
-                        <input id="persInfoEmail"class="dd" disabled value="esto es porque"></input>
+                        <div class="dt">Correo Electrónico</div>
+                        <input id="persInfoEmail"class="dd" disabled placeholder="Correo Electrónico" name="email"></input>
                     </div>
                     <div>
-                        <dt>ID</dt>
-                        <input id="persInfoId"class="dd" disabled value="hay un error"></input>
+                        <div class="dt">ID</div>
+                        <input id="persInfoId"class="dd" disabled value="hay un error" name="ID"oninput="this.value = this.value.replace(/[^0-9]/g, '')"></input>
                     </div>
-                </dl>
+                </form>
             </div>
             <hr>
             <div class="otherDiv">

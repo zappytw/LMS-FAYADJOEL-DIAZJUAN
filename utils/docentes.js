@@ -11,6 +11,8 @@ const tableDiv = document.getElementById("tableDiv")
 const profesoresData = JSON.parse(localStorage.getItem("profesores"))
 const cursosData = JSON.parse(localStorage.getItem("cursosDisponibles"))
 const searchForm = document.getElementById("searchForm")
+
+const persInfoForm = document.getElementById("persInfoForm")
 const addBtn = document.getElementById("addBtn")
 const searchInput = document.getElementById("searchInput")
 const searchSelect = document.getElementById("searchSelect")
@@ -92,7 +94,18 @@ function addProfesor(){
     areaAcademicaSelect.innerHTML=""
     cargarAreasSelect(areaAcademicaSelect);
     //=====================
+    //CARGAR CURSOS
     mostrarCursos(cargarCursos(areaAcademicaSelect.value))
+    //=====================
+    //ACTIVAR INPUTS
+    const inputs = persInfoForm.querySelectorAll('input')
+    inputs.forEach(input=>{
+        if(input.id!=="persInfoId"){
+            input.disabled=false
+        }
+    })
+    //=====================
+    //ENCONTRAR CODIGO MAS ALTO
 }
 //==Carga inicial==
 mostrarProfesores(profesoresData)
@@ -173,7 +186,7 @@ function editProfesor(editBtn){
 
     //CARGAR INFO PROFESOR
     persInfoImg.src=profesorData[0].fotoUrl
-    persInfoName.textContent=profesorData[0].nombres + " " + profesorData[0].apellidos
+    persInfoName.value=profesorData[0].nombres + " " + profesorData[0].apellidos
     persInfoDocument.value=profesorData[0].identificacion
     persInfoEmail.value=profesorData[0].email
     persInfoId.value=profesorData[0].codigo
