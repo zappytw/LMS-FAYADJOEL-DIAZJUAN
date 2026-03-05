@@ -37,7 +37,10 @@
     gap: 20px;
 }
 
-
+#editProfesorForm{
+    display: flex;
+    flex-direction: column;
+}
 .deleteBtn{
     border-color: red;
     color: red;
@@ -70,8 +73,8 @@
 #searchForm{
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
     min-width: 600px;
+    width: 80%;
 }
 #searchForm > *{
     border: 1px solid black;
@@ -89,14 +92,21 @@
 }
 
 #searchBtn{
-    border-left: none !important;
+    border: 3px solid;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
     width: 10%;
     cursor: pointer;
-    background-color: #FFD369 ;
+    background-color: var(--bgBody) ;
     font-weight: bold;
-    color: #333333;
+    color: #FFD369;
+    border-color: #FFD369;
+    box-sizing: border-box;
+    transition: ease-in-out 0.2s;
+}
+#searchBtn:hover, .addBtn:hover{
+    color: var(--bgBody);
+    background-color: #FFD369;
 }
 #searchSelect{
     width: 20%;
@@ -174,6 +184,8 @@
     color: var(--colorTextInput);
     padding: 10px;
     box-sizing: border-box;
+    margin-top: 20px;
+    margin-bottom: 30px;
 }
 .persInfoDiv hr{
     width: 100%;
@@ -276,4 +288,56 @@
 #notBtn:hover{
     background-color: red;
     color: var(--bgBody);
+}
+.searchAddDiv{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    height: fit-content;
+    margin-bottom: 20px;
+
+}
+.addBtn{
+    color: #FFD369;
+    border-color: #FFD369;
+    background-color: var(--bgBody);
+    height: auto;
+    width: 70px;
+    transition: width ease-in-out 0.4s;
+    padding: 10px;
+}
+.addBtn span {
+    opacity: 0;
+    width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    display: inline-block; 
+    transition: opacity 0.4s ease-in-out, width 0.4s ease-in-out;
+    transition-delay: 0s;
+}
+
+.addBtn:hover span {
+    opacity: 1;
+    width: 120px;
+}
+.addBtn:hover{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+    width: 200px;
+}
+.addBtn i{
+    transition: ease-in-out 0.4s;
+}
+.addBtn:hover i{
+    animation: rotarmas 0.4s ease-in-out 1;
+}
+@keyframes rotarmas {
+    0%{
+        transform: translateX(0px);
+    }
+    100%{
+        transform: translate(0px) rotate(180deg);
+    }
 }

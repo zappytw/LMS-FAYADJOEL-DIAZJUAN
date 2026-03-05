@@ -11,18 +11,21 @@ const tableDiv = document.getElementById("tableDiv")
 const profesoresData = JSON.parse(localStorage.getItem("profesores"))
 const cursosData = JSON.parse(localStorage.getItem("cursosDisponibles"))
 const searchForm = document.getElementById("searchForm")
+const addBtn = document.getElementById("addBtn")
 const searchInput = document.getElementById("searchInput")
 const searchSelect = document.getElementById("searchSelect")
 const editProfesorDiv = document.getElementById("bigProfesorDiv")
 const overlay = document.getElementById("overlay")
 const coursesDiv = document.getElementById("coursesDiv")
 const areaAcademicaSelect =document.getElementById("areaAcademicaSelect")
-const editProfesorForm = document.getElementById("editProfesorForm")
+const areasEditProfesorForm = document.getElementById("editProfesorForm")
 
 const popup = document.getElementById("popup")
 const okBtn = document.getElementById("okBtn")
 const notBtn = document.getElementById("notBtn")
 const popupText = document.getElementById("popupText")
+
+
 //Datos de profesor individual
 const persInfoName = document.getElementById("persInfoName")
 const persInfoImg = document.getElementById("persInfoImg")
@@ -79,10 +82,21 @@ searchForm.addEventListener("submit",(event)=>{
     let filteredProfesores = buscarProfesores(searchQuery)
     mostrarProfesores(filteredProfesores);
 })
-
+function addProfesor(){
+    //MOSTRAR EL MODAL
+    editProfesorDiv.classList.remove("hidden")
+    overlay.classList.remove("hidden")
+    document.body.style.overflow =  "hidden";
+    //====================
+    //CARGAR AREAS ACADEMICAS
+    areaAcademicaSelect.innerHTML=""
+    cargarAreasSelect(areaAcademicaSelect);
+    //=====================
+    mostrarCursos(cargarCursos(areaAcademicaSelect.value))
+}
 //==Carga inicial==
 mostrarProfesores(profesoresData)
-
+addBtn.addEventListener("click", addProfesor)
 function cargarAreasSelect(select){
     let areas = [];
     cursosData.categorias.forEach(curso => {
@@ -160,9 +174,9 @@ function editProfesor(editBtn){
     //CARGAR INFO PROFESOR
     persInfoImg.src=profesorData[0].fotoUrl
     persInfoName.textContent=profesorData[0].nombres + " " + profesorData[0].apellidos
-    persInfoDocument.textContent=profesorData[0].identificacion
-    persInfoEmail.textContent=profesorData[0].email
-    persInfoId.textContent=profesorData[0].codigo
+    persInfoDocument.value=profesorData[0].identificacion
+    persInfoEmail.value=profesorData[0].email
+    persInfoId.value=profesorData[0].codigo
     //======================
 }
 areaAcademicaSelect.addEventListener("change",()=>{
@@ -170,9 +184,12 @@ areaAcademicaSelect.addEventListener("change",()=>{
 })
 //=============
 function cerrarEdit(){
-    editProfesorDiv.classList.add("hidden")
-    overlay.classList.add("hidden")
-    document.body.style.overflow="auto";
+    if(popup.classList.contains("hidden")){
+        editProfesorDiv.classList.add("hidden")
+        overlay.classList.add("hidden")
+        document.body.style.overflow="auto";
+    }
+    
 }
 overlay.addEventListener("click", (e)=> {
     if(e.target===overlay){
@@ -185,18 +202,35 @@ document.addEventListener("keydown",(e)=>{
     }
 })
 
-function deleteProfesor(deleteBtn){
-    
+async function deleteProfesor(deleteBtn){
+    if(await popupConfirm("Quieres eliminar este profesor?")){
+        const profesores = JSON.parse(localStorage.getItem("profesores"))
+        const index = profesores.findIndex(p => p.codigo === deleteBtn.dataset.id)
+        if(index != -1){
+            if(profesores[index].cursos.length === 0){
+                profesores[index].active = false
+                localStorage.setItem("profesores",JSON.stringify(profesores))
+                window.location.href="docentes.html"
+            } else {
+                await popupConfirm("El docente aun tiene cursos activos, por favor asegurese que el docente no tenga cursos activos antes de proceder")
+            }
+        } else{
+            console.log("Accion cancelada: no se borro ningun profesor")
+        }
+    }
+
+
 }
 tableDiv.addEventListener("click", (e)=>{
     const editBtn = e.target.closest(".editBtn");
     const deleteBtn = e.target.closest(".deleteBtn");
     if(editBtn){
         editProfesor(editBtn)
-    }
+    } else{
     if(deleteBtn){
         deleteProfesor(deleteBtn)
     }
+}
 })
 function capitalizar(string) { //funcion que hice porque el value de area del form para editar-
     //-estaba toda en minuscula
@@ -205,11 +239,13 @@ function capitalizar(string) { //funcion que hice porque el value de area del fo
 }
 
 async function popupConfirm(message) {
+    overlay.classList.remove("hidden")
     popup.classList.remove("hidden")
     popupText.textContent=message
     return new Promise((resolve) => {
         const closePopup = (value) => {
             popup.classList.add("hidden");
+            overlay.classList.add("hidden")
             okBtn.removeEventListener("click", proceed);
             notBtn.removeEventListener("click", cancel);
             resolve(value);
@@ -222,7 +258,7 @@ async function popupConfirm(message) {
         notBtn.addEventListener("click", cancel);
     });
 }
-editProfesorForm.addEventListener("submit",async (e)=>{
+areasEditProfesorForm.addEventListener("submit",async (e)=>{
     e.preventDefault()
     if (await popupConfirm("Quieres confirmar y guardar los cambios realizados?")){
     
@@ -231,7 +267,7 @@ editProfesorForm.addEventListener("submit",async (e)=>{
     const nuevosCursos = formData.getAll("curso")
     const nuevaArea = formData.get("area")
 //AGARRAR DATOS DEL DOM
-    const id = persInfoId.textContent
+    const id = persInfoId.value
 
     let profesores = JSON.parse(localStorage.getItem("profesores"))
 //BUSCAR AL PROFESOR EN LA LISTA DE LOCALSTORAGE
@@ -249,7 +285,8 @@ editProfesorForm.addEventListener("submit",async (e)=>{
 //FINALMENTE, RECARGAR LA PAGINA PARA APLICAR CAMBIOS
     window.location.href="docentes.html"
 } else {
-    cerrarEdit
+    cerrarEdit()
+
 }
 })
 
