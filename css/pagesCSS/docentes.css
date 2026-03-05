@@ -9,8 +9,9 @@
     border-radius: 10px;
 }
 .profesorDiv{
+    background-color: var(--bgCard);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.315);
     align-items: center;
-    box-shadow: 0 2px 5px black;
     border-radius: 10px;
     padding: 10px;
 }
@@ -25,8 +26,7 @@
     width: fit-content;
     max-width: 90vw;
     gap: 20px;
-    border: 2px solid var(--borderColor);
-    box-shadow: 0 0 10px black;
+    border: 2px solid transparent;
     padding: 20px;
     border-radius: 10px;
 }

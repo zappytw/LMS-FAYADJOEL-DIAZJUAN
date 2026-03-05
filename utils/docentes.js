@@ -1,4 +1,9 @@
 import{inicializarProfesores, inicializarCursosDisponibles} from "./data.js"
+import { cargarTema ,cambiarTema} from "./basicFuntions.js"
+
+cargarTema();
+document.getElementById("themeBtn").addEventListener("click",cambiarTema)
+
 inicializarProfesores();
 inicializarCursosDisponibles();
 
@@ -247,28 +252,4 @@ editProfesorForm.addEventListener("submit",async (e)=>{
     cerrarEdit
 }
 })
-const themeBtn = document.querySelector(".themeBtn img");
 
-function toggleTheme(){
-    document.documentElement.classList.toggle("dark-theme");
-
-    const isDark = document.documentElement.classList.contains("dark-theme");
-
-    if(isDark){
-        themeBtn.src = "../media/moon.png";
-        localStorage.setItem("theme","dark");
-    }else{
-        themeBtn.src = "../media/sun.png";
-        localStorage.setItem("theme","light");
-    }
-}
-
-document.querySelector(".themeBtn").addEventListener("click", toggleTheme);
-
-// Cargar tema guardado
-const savedTheme = localStorage.getItem("theme");
-
-if(savedTheme === "dark"){
-    document.documentElement.classList.add("dark-theme");
-    themeBtn.src = "../media/moon.png";
-}
