@@ -384,94 +384,144 @@ const profesores = [
 
 const administradores = [
   {
-    identificacion: "100100001",
+    identificacion: 100100001,
     nombres: "Juan Carlos",
     apellidos: "Pérez Gómez",
     email: "juan.perez@empresa.com",
     telefono: "3001110001",
     cargo: "Administrador",
-    password: "admin123"
+    password: "admin123",
+    direccion: "Calle 45 #12-30, Bogotá",
+    fotoPerfil: "https://randomuser.me/api/portraits/men/11.jpg",
+    nivelAcceso: "Alto",
+    sede: "Bogotá - Principal",
+    jornada: "Tiempo completo"
   },
   {
-    identificacion: "100100002",
+    identificacion: 100100002,
     nombres: "María Fernanda",
     apellidos: "López Rodríguez",
     email: "maria.lopez@empresa.com",
     telefono: "3001110002",
     cargo: "Administrador",
-    password: "admin234"
+    password: "admin234",
+    direccion: "Carrera 18 #7-22, Medellín",
+    fotoPerfil: "https://randomuser.me/api/portraits/women/46.jpg",
+    nivelAcceso: "Medio",
+    sede: "Medellín - Norte",
+    jornada: "Turno mañana"
   },
   {
-    identificacion: "100100003",
+    identificacion: 100100003,
     nombres: "Carlos Andrés",
     apellidos: "Ramírez Torres",
     email: "carlos.ramirez@empresa.com",
     telefono: "3001110003",
     cargo: "Administrador",
-    password: "admin345"
+    password: "admin345",
+    direccion: "Av. 3N #52-10, Cali",
+    fotoPerfil: "https://randomuser.me/api/portraits/men/33.jpg",
+    nivelAcceso: "Alto",
+    sede: "Cali - Centro",
+    jornada: "Tiempo completo"
   },
   {
-    identificacion: "100100004",
+    identificacion: 100100004,
     nombres: "Laura Sofía",
     apellidos: "Martínez Díaz",
     email: "laura.martinez@empresa.com",
     telefono: "3001110004",
     cargo: "Administrador",
-    password: "admin456"
+    password: "admin456",
+    direccion: "Calle 72 #50-15, Barranquilla",
+    fotoPerfil: "https://randomuser.me/api/portraits/women/19.jpg",
+    nivelAcceso: "Medio",
+    sede: "Barranquilla - Principal",
+    jornada: "Turno tarde"
   },
   {
-    identificacion: "100100005",
+    identificacion: 100100005,
     nombres: "Andrés Felipe",
     apellidos: "Gómez Castro",
     email: "andres.gomez@empresa.com",
     telefono: "3001110005",
     cargo: "Administrador",
-    password: "admin567"
+    password: "admin567",
+    direccion: "Cra. 9 #24-61, Bogotá",
+    fotoPerfil: "https://randomuser.me/api/portraits/men/44.jpg",
+    nivelAcceso: "Bajo",
+    sede: "Bogotá - Zona Sur",
+    jornada: "Medio tiempo"
   },
   {
-    identificacion: "100100006",
+    identificacion: 100100006,
     nombres: "Diana Carolina",
     apellidos: "Herrera Vargas",
     email: "diana.herrera@empresa.com",
     telefono: "3001110006",
     cargo: "Administrador",
-    password: "admin678"
+    password: "admin678",
+    direccion: "Calle 10 #43-08, Medellín",
+    fotoPerfil: "https://randomuser.me/api/portraits/women/52.jpg",
+    nivelAcceso: "Alto",
+    sede: "Medellín - Principal",
+    jornada: "Tiempo completo"
   },
   {
-    identificacion: "100100007",
+    identificacion: 100100007,
     nombres: "Pedro Luis",
     apellidos: "Morales Rojas",
     email: "pedro.morales@empresa.com",
     telefono: "3001110007",
     cargo: "Administrador",
-    password: "admin789"
+    password: "admin789",
+    direccion: "Calle 25 #8-40, Cali",
+    fotoPerfil: "https://randomuser.me/api/portraits/men/57.jpg",
+    nivelAcceso: "Medio",
+    sede: "Cali - Norte",
+    jornada: "Turno mañana"
   },
   {
-    identificacion: "100100008",
+    identificacion: 100100008,
     nombres: "Camila Andrea",
     apellidos: "Suárez Medina",
     email: "camila.suarez@empresa.com",
     telefono: "3001110008",
     cargo: "Administrador",
-    password: "admin890"
+    password: "admin890",
+    direccion: "Cra. 46 #84-12, Barranquilla",
+    fotoPerfil: "https://randomuser.me/api/portraits/women/61.jpg",
+    nivelAcceso: "Alto",
+    sede: "Barranquilla - Zona Norte",
+    jornada: "Turno nocturno"
   },
   {
-    identificacion: "100100009",
+    identificacion: 100100009,
     nombres: "Jorge Alberto",
     apellidos: "Castillo Peña",
     email: "jorge.castillo@empresa.com",
     telefono: "3001110009",
     cargo: "Administrador",
-    password: "admin901"
+    password: "admin901",
+    direccion: "Calle 93 #15-20, Bogotá",
+    fotoPerfil: "https://randomuser.me/api/portraits/men/63.jpg",
+    nivelAcceso: "Medio",
+    sede: "Bogotá - Zona Norte",
+    jornada: "Turno tarde"
   },
   {
-    identificacion: "100100010",
+    identificacion: 100100010,
     nombres: "Natalia Paola",
     apellidos: "Ortega Silva",
     email: "natalia.ortega@empresa.com",
     telefono: "3001110010",
     cargo: "Administrador",
-    password: "admin012"
+    password: "admin012",
+    direccion: "Calle 33 #70-05, Medellín",
+    fotoPerfil: "https://randomuser.me/api/portraits/women/73.jpg",
+    nivelAcceso: "Bajo",
+    sede: "Medellín - Centro",
+    jornada: "Medio tiempo"
   }
 ];
 

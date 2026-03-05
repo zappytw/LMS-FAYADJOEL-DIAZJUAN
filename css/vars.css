@@ -11,11 +11,16 @@
         --pColorBtnCrearCurso: #ffffff;
 
         --bgForm: #ffffff;
-        --bdInputForm: #EEEEEE;
+        --bgInputForm: #EEEEEE;
         --colorTextInput: #000000;
 
         --bgBtnCrear: #393E46;
         --colorBtnCrear: #EEEEEE;
+
+        --bgBanner1: #222831;
+        --bgBanner2: #393E46;
+
+        --bgInputPerfil: #ffffff;
     }
 
     .dark{
@@ -39,4 +44,9 @@
 
         --bgBtnCrear: #393E46;
         --colorBtnCrear: #EEEEEE;
+
+        --bgBanner1: #032044;
+        --bgBanner2: #053570;
+
+        --bgInputPerfil: #49505A;
     }

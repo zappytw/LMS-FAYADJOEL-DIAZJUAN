@@ -29,7 +29,4 @@ loginForm.addEventListener("submit",(e) => {
             }, 2000);
         }
     });
-
-    console.log(formData.get("email"))
-    console.log(formData.get("password"))
 })

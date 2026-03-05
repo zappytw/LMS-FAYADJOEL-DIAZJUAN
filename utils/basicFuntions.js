@@ -18,3 +18,11 @@ export function cambiarTema(){
 
     img.src = isDark ? "../media/sun.png" : "../media/moon.png";
 }
+
+export function modificarProfilePanel(){
+    const btnProfile = document.querySelector(".btnProfile")
+    const usuarioLogeado = JSON.parse(localStorage.getItem("usuarioLogeado"))
+
+    if(usuarioLogeado.fotoPerfil) btnProfile.querySelector("img").src = usuarioLogeado.fotoPerfil
+    if(usuarioLogeado.nombres) btnProfile.querySelector("div").textContent = usuarioLogeado.nombres
+}

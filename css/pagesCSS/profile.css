@@ -1,0 +1,110 @@
+main{
+    width: 90vw;
+    max-width: 900px;
+}
+
+/*BANNER*/
+
+.basicInfoProfile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+    height: 300px;
+    background: linear-gradient(
+        to bottom,
+        var(--bgBanner1),
+        var(--bgBanner2) 50%,
+        var(--bgCard) 50%
+    );
+
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+}
+
+.basicInfoProfile .fotoPerfil{
+    margin-top: 86px;
+    margin-bottom: 10px;
+    border-radius: 100%;
+}
+
+.basicInfoProfile .cargo{
+    color: var(--pColor);
+}
+
+/*FORM*/
+
+#infoProfile{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    background-color: var(--bgCard);
+
+    width: 100%;
+
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+#infoProfile input{
+    height: 15px;
+    padding: 7px;
+
+    border-radius: 5px;
+    border: none;
+    outline: none;
+
+    background-color: var(--bgInputPerfil);
+    color: var(--colorTextInput);
+}
+
+#infoProfile h2{
+    border-bottom: 3px solid #FFD369;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.personalInfo{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+
+    padding: 25px;
+}
+
+.input_Group{
+    display: flex;
+    flex-direction: column;
+
+    /* arreglar esto */
+    width: 48%;
+}
+
+@media (max-width:700px) {
+    .input_Group{
+        width: 100%;
+    }
+}
+
+#infoProfile button{
+    background-color: var(--bgBtnCrear);
+    color: var(--colorBtnCrear);
+
+    align-self: center;
+    margin-bottom: 20px;
+
+    width: 150px;
+    padding: 10px;
+
+    border: none;
+    border-radius: 20px;
+}
+
+label{
+    margin-bottom: 5px;
+}
