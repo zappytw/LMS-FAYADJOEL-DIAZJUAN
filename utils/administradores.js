@@ -47,7 +47,7 @@ function mostrarAdministradores(data){
         if(admin.active === true){
         const nombre = admin.nombres
         const apellidos = admin.apellidos
-        const identificacion = admin.identificacion
+        const identificacion = String(admin.identificacion)
         const email = admin.email
         const foto = admin.fotoPerfil
         const nivelAcceso = admin.nivelAcceso
@@ -143,6 +143,7 @@ mostrarAdministradores(administradoresData)
 addBtn.addEventListener("click", addProfesor)
 
 function cargarSelects(select,akey){
+    select.innerHTML=""
     let lista = [];
 
     administradoresData.forEach(admin => {
@@ -202,15 +203,17 @@ function editProfesor(editBtn){
     persInfoLastName.classList.add("hidden")
     persInfoName.classList.remove("inputFormStyle")
      //DATOS DEL PROFESOR
-    let adminData = buscarAdministradores(editBtn.dataset.id)
+    let adminData = administradoresData.find(
+    admin => String(admin.identificacion) === editBtn.dataset.id
+)
      //=====================
     //EDITAR AREA ACADEMICA
         cargarSelects(nivelAccesoSelect, "nivelAcceso")
         cargarSelects(sedeSelect, "sede")
         cargarSelects(jornadaSelect, "jornada")
-        nivelAccesoSelect.value=adminData[0].nivelAcceso.toLowerCase()
-        sedeSelect.value=adminData[0].sede.toLowerCase()
-        jornadaSelect.value=adminData[0].jornada.toLowerCase()
+        nivelAccesoSelect.value=adminData.nivelAcceso.toLowerCase()
+        sedeSelect.value=adminData.sede.toLowerCase()
+        jornadaSelect.value=adminData.jornada.toLowerCase()
     //=====================
 
     overlay.scrollTop=0 //RESET SCROLLBAR
@@ -222,12 +225,12 @@ function editProfesor(editBtn){
     //====================
 
     //CARGAR INFO PROFESOR
-    persInfoImg.src=adminData[0].fotoPerfil
-    persInfoName.value=adminData[0].nombres + " " + adminData[0].apellidos
-    persInfoDireccion.value=adminData[0].direccion
-    persInfoEmail.value=adminData[0].email
-    persInfoTelefono.value=adminData[0].telefono
-    persInfoIdentificacion.value=adminData[0].identificacion
+    persInfoImg.src=adminData.fotoPerfil
+    persInfoName.value=adminData.nombres + " " + adminData.apellidos
+    persInfoDireccion.value=adminData.direccion
+    persInfoEmail.value=adminData.email
+    persInfoTelefono.value=adminData.telefono
+    persInfoIdentificacion.value=adminData.identificacion
     //======================
 }
 //=============
@@ -322,7 +325,7 @@ editAdminForm.addEventListener("submit",async (e)=>{
     
 //AGARRAR DATOS DEL FORM
     const formData = new FormData(e.target)
-    const nuevoNivelAcceso = formData.getAll("nvAcceso")
+    const nuevoNivelAcceso = formData.get("nvAcceso")
     const nuevaSede = formData.get("sede")
     const nuevaJornada = formData.get("jornada")
 //AGARRAR DATOS DEL DOM
@@ -332,19 +335,21 @@ editAdminForm.addEventListener("submit",async (e)=>{
 //BUSCAR AL -ADMINISTRADOR- EN LA LISTA DE LOCALSTORAGE
     const index = admins.findIndex(p => p.identificacion === id)
     if(index !== -1){//VERIFICAR QUE EXISTA
-        admins[index].nivelAcceso = capitalizar(nuevoNivelAcceso)
-        admins[index].sede = capitalizar(nuevaSede)
-        admins[index].jornada = capitalizar(nuevaJornada)
+        admins[index].nivelAcceso = capitalizar(String(nuevoNivelAcceso))
+        admins[index].sede = capitalizar(String(nuevaSede))
+        admins[index].jornada = capitalizar(String(nuevaJornada))
+        console.log(index)
     } else { //SI NO EXISTE, CREAR UNO
-            const emailExiste = admins.some(p => 
-                p.email === admins.value && p.email !== persInfoEmail.value
-            )
-            const telefonoExiste = admins.some(p => 
-                p.telefono === persInfoTelefono.value && p.telefono !== persInfoTelefono.value
-            )
-            if (emailExiste || telefonoExiste){
-                await popupConfirm("El documento o correo electronico ya está registrado, asegurese de no ingresar uno ya existente")
-            } else {
+        const emailExiste = admins.some(p => 
+            p.email === persInfoEmail.value && String(p.identificacion) !== String(id)
+        )
+
+        const telefonoExiste = admins.some(p => 
+            p.telefono === persInfoTelefono.value && String(p.identificacion) !== String(id)
+        )
+        if (emailExiste || telefonoExiste){
+            await popupConfirm("El telefono o correo electronico ya está registrado, asegurese de no ingresar uno ya existente")
+        } else {
         admins.push(
             {
             identificacion: persInfoIdentificacion.value,
@@ -355,7 +360,7 @@ editAdminForm.addEventListener("submit",async (e)=>{
             cargo: "Administrador",
             password: "admin123",
             direccion: persInfoDireccion.value,
-            fotoPerfil: persInfoImg.value,
+            fotoPerfil: persInfoImg.src,
             nivelAcceso: capitalizar(nivelAccesoSelect.value),
             sede: capitalizar(sedeSelect.value),
             active: true,
@@ -369,7 +374,7 @@ editAdminForm.addEventListener("submit",async (e)=>{
     }
 //FINALMENTE, RECARGAR LA PAGINA PARA APLICAR CAMBIOS
     localStorage.setItem("administradores", JSON.stringify(admins))
-    window.location.href="administradores.html"
+    //window.location.href="administradores.html"
 } else {
     cerrarEdit()
 }
