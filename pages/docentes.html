@@ -72,22 +72,22 @@
                 <div class="profesorProfile">
                 <img class="profesorInfoImg" id="persInfoImg" src="../media/profilePlaceholder.png" alt="">
                 <div>
-                    <input id="persInfoName" class="dd" placeholder="Nombres" oninput="this.style.width = (this.value.length + 1) + 'ch'" maxlength="23" minlength="5"></input>
-                    <input id="persInfoLastName" class="dd" placeholder="Apellidos" oninput="this.style.width = (this.value.length + 1) + 'ch'" maxlength="23" minlength="5"></input>
+                    <input id="persInfoName" class="dd inputTextStyle" placeholder="Nombres" oninput="this.style.width = (this.value.length + 1) + 'ch'" maxlength="23" minlength="5" disabled>
+                    <input id="persInfoLastName" class="dd hidden inputFormStyle inputTextStyle " placeholder="Apellidos" oninput="this.style.width = (this.value.length + 1) + 'ch'" maxlength="23" minlength="5" value="algo">
                 </div>
                 </div>
                 <hr>
                     <div>
                         <div class="dt">Nº Documento</div>
-                        <input id="persInfoDocument"class="dd" disabled placeholder="Número de documento" name="document" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></input>
+                        <input id="persInfoDocument"class="dd" disabled placeholder="Número de documento" name="document" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                     </div>
                     <div>
                         <div class="dt">Correo Electrónico</div>
-                        <input id="persInfoEmail"class="dd" disabled placeholder="Correo Electrónico" name="email"></input>
+                        <input id="persInfoEmail"class="dd" disabled placeholder="Correo Electrónico" name="email" type="email">
                     </div>
                     <div>
                         <div class="dt">ID</div>
-                        <input id="persInfoId"class="dd" disabled value="hay un error" name="ID"oninput="this.value = this.value.replace(/[^0-9]/g, '')"></input>
+                        <input id="persInfoId"class="dd" disabled value="hay un error" name="ID"oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                     </div>
                 </form>
             </div>

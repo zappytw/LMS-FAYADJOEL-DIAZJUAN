@@ -30,11 +30,13 @@ const popupText = document.getElementById("popupText")
 
 //Datos de profesor individual
 const persInfoName = document.getElementById("persInfoName")
+const persInfoLastName = document.getElementById("persInfoLastName")
 const persInfoImg = document.getElementById("persInfoImg")
 const persInfoDocument = document.getElementById("persInfoDocument")
 const persInfoEmail = document.getElementById("persInfoEmail")
 const persInfoId = document.getElementById("persInfoId")
-
+//Este const ayuda a validar que el value sea un correo electronico valido usando .test
+const estructuraEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 function mostrarProfesores(data){
     data.forEach(profesor => {
         if(profesor.active === true){
@@ -50,7 +52,7 @@ function mostrarProfesores(data){
         profesorDiv.innerHTML=`
         <div class="profesorName"><img src=${foto}> ${nombre} ${apellidos}</div>
         <div>${id}</div>
-        <div>${email}</div>
+        <div class="cortarTexto">${email}</div>
         <div>${area}</div>
         <div class="profesorDivBtns"><button class="btn editBtn" title="Editar Docente" data-id=${id}><i class="fa-solid fa-pen-to-square editBtnI"></i></button>
             <button class="btn deleteBtn" title="Eliminar Docente" data-id=${id}><i class="fa-solid fa-xmark"></i></button></div>
@@ -65,7 +67,7 @@ function buscarProfesores(searchQuery){
     || profesor.apellidos.toLowerCase().includes(searchQuery.toLowerCase()) 
     || profesor.codigo.toLowerCase().includes(searchQuery.toLowerCase())
     )
-&&  (profesor.areaAcademica.toLowerCase() === searchSelect.value.toLowerCase() || searchSelect.value==="")))
+&&  (profesor.areaAcademica.toLowerCase() === searchSelect.value.toLowerCase() || searchSelect.value.trim()==="")))
 }
 
 searchForm.addEventListener("submit",(event)=>{
@@ -90,6 +92,14 @@ function addProfesor(){
     overlay.classList.remove("hidden")
     document.body.style.overflow =  "hidden";
     //====================
+    //BORRAR DATOS ANTERIORES
+        persInfoImg.src="../media/profilePlaceholder.png"
+        persInfoName.value=""
+        persInfoLastName.value=""
+        persInfoDocument.value=""
+        persInfoEmail.value=""
+        persInfoId.value=""
+    //=======================
     //CARGAR AREAS ACADEMICAS
     areaAcademicaSelect.innerHTML=""
     cargarAreasSelect(areaAcademicaSelect);
@@ -104,8 +114,25 @@ function addProfesor(){
             input.disabled=false
         }
     })
+
+    persInfoLastName.classList.remove("hidden")
+    persInfoName.classList.add("inputFormStyle")
     //=====================
     //ENCONTRAR CODIGO MAS ALTO
+    const profesores = JSON.parse(localStorage.getItem("profesores"))
+    let codigoAlto = 0;
+    profesores.forEach(profesor => {
+        let codigoProfesor = (profesor.codigo.slice(-3))
+        if (Number(codigoProfesor) > codigoAlto){
+            codigoAlto = Number(profesor.codigo.slice(-3))
+        }
+    });
+    let nCeros = 3
+    codigoAlto+=1
+    codigoAlto = String(codigoAlto)
+    nCeros -= codigoAlto.length
+    console.log(codigoAlto)
+    persInfoId.value ="PROF"+ ("0".repeat(nCeros)) + codigoAlto
 }
 //==Carga inicial==
 mostrarProfesores(profesoresData)
@@ -160,7 +187,14 @@ function mostrarCursos(cursos, cursosProfesor=[]){
 }
 // EDITAR PROFESOR
 function editProfesor(editBtn){
-
+    //DESHABILITAR INPUTS
+    const inputs = persInfoForm.querySelectorAll('input')
+    inputs.forEach(input=>{
+            input.disabled=true
+        }
+    )
+    persInfoLastName.classList.add("hidden")
+    persInfoName.classList.remove("inputFormStyle")
     //EDITAR AREA ACADEMICA
     let cursosProfesor=buscarProfesores(editBtn.dataset.id)[0].cursos
     let areaAcademica=buscarProfesores(editBtn.dataset.id)[0].areaAcademica
@@ -273,6 +307,17 @@ async function popupConfirm(message) {
 }
 areasEditProfesorForm.addEventListener("submit",async (e)=>{
     e.preventDefault()
+    if(persInfoName.value.trim()==="" || persInfoLastName.value.trim()===""
+    || persInfoDocument.value.trim()===""|| persInfoEmail.value.trim()===""
+    || persInfoId.value.trim()===""
+    ){
+    await popupConfirm("Un campo está vacio, asegurese de llenar todos los campos al crear un nuevo usuario")
+    cerrarEdit()
+    }else{ 
+        if(!estructuraEmail.test(persInfoEmail.value) || persInfoEmail.value.length > 64 ){
+            await popupConfirm("Correo electrónico inválido o muy largo (Caracteres máximos: 64), asegurese de colocar una direccion de correo válida")
+        } else {
+
     if (await popupConfirm("Quieres confirmar y guardar los cambios realizados?")){
     
 //AGARRAR DATOS DEL FORM
@@ -293,12 +338,41 @@ areasEditProfesorForm.addEventListener("submit",async (e)=>{
             categoriaId: Number(cursoId[0]),
             cursoId: Number(cursoId)
         }))
-        localStorage.setItem("profesores", JSON.stringify(profesores))
+    } else { //SI NO EXISTE, CREAR UNO
+            const emailExiste = profesores.some(p => 
+                p.email === persInfoEmail.value && p.codigo !== persInfoId.value
+            )
+            const documentoExiste = profesores.some(p => 
+                p.identificacion === persInfoDocument.value && p.codigo !== persInfoId.value
+            )
+            if (emailExiste || documentoExiste){
+                await popupConfirm("El documento o correo electronico ya está registrado, asegurese de no ingresar uno ya existente")
+            } else {
+        profesores.push(
+            {
+            active: true,
+            codigo: persInfoId.value,
+            identificacion: persInfoDocument.value,
+            nombres: persInfoName.value,
+            apellidos: persInfoLastName.value,
+            email: persInfoEmail.value,
+            fotoUrl: "../media/profilePlaceholder.png",
+            areaAcademica: capitalizar(nuevaArea),
+            cursos: nuevosCursos.map(cursoId => ({
+                categoriaId: Number(cursoId[0]),
+                cursoId: Number(cursoId)
+            }))
+            },
+        )
+        //GUARDAR DATOS EN LOCALSTORAGE
+            localStorage.setItem("profesores", JSON.stringify(profesores))
+    }
     }
 //FINALMENTE, RECARGAR LA PAGINA PARA APLICAR CAMBIOS
     window.location.href="docentes.html"
 } else {
     cerrarEdit()
-
+}
+}
 }
 })
