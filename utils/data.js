@@ -395,6 +395,7 @@ const administradores = [
     fotoPerfil: "https://randomuser.me/api/portraits/men/11.jpg",
     nivelAcceso: "Alto",
     sede: "Bogotá - Principal",
+    active: true,
     jornada: "Tiempo completo"
   },
   {
@@ -409,6 +410,7 @@ const administradores = [
     fotoPerfil: "https://randomuser.me/api/portraits/women/46.jpg",
     nivelAcceso: "Medio",
     sede: "Medellín - Norte",
+    active: true,
     jornada: "Turno mañana"
   },
   {
@@ -423,6 +425,7 @@ const administradores = [
     fotoPerfil: "https://randomuser.me/api/portraits/men/33.jpg",
     nivelAcceso: "Alto",
     sede: "Cali - Centro",
+    active: true,
     jornada: "Tiempo completo"
   },
   {
@@ -437,6 +440,7 @@ const administradores = [
     fotoPerfil: "https://randomuser.me/api/portraits/women/19.jpg",
     nivelAcceso: "Medio",
     sede: "Barranquilla - Principal",
+    active: true,
     jornada: "Turno tarde"
   },
   {
@@ -451,6 +455,7 @@ const administradores = [
     fotoPerfil: "https://randomuser.me/api/portraits/men/44.jpg",
     nivelAcceso: "Bajo",
     sede: "Bogotá - Zona Sur",
+    active: true,
     jornada: "Medio tiempo"
   },
   {
@@ -465,6 +470,7 @@ const administradores = [
     fotoPerfil: "https://randomuser.me/api/portraits/women/52.jpg",
     nivelAcceso: "Alto",
     sede: "Medellín - Principal",
+    active: true,
     jornada: "Tiempo completo"
   },
   {
@@ -479,6 +485,7 @@ const administradores = [
     fotoPerfil: "https://randomuser.me/api/portraits/men/57.jpg",
     nivelAcceso: "Medio",
     sede: "Cali - Norte",
+    active: true,
     jornada: "Turno mañana"
   },
   {
@@ -493,6 +500,7 @@ const administradores = [
     fotoPerfil: "https://randomuser.me/api/portraits/women/61.jpg",
     nivelAcceso: "Alto",
     sede: "Barranquilla - Zona Norte",
+    active: true,
     jornada: "Turno nocturno"
   },
   {
@@ -507,6 +515,7 @@ const administradores = [
     fotoPerfil: "https://randomuser.me/api/portraits/men/63.jpg",
     nivelAcceso: "Medio",
     sede: "Bogotá - Zona Norte",
+    active: true,
     jornada: "Turno tarde"
   },
   {
@@ -521,6 +530,7 @@ const administradores = [
     fotoPerfil: "https://randomuser.me/api/portraits/women/73.jpg",
     nivelAcceso: "Bajo",
     sede: "Medellín - Centro",
+    active: true,
     jornada: "Medio tiempo"
   }
 ];

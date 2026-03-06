@@ -60,7 +60,7 @@
             <form id="searchForm">
                 <input type="text" name="" id="searchInput" placeholder="Buscar">
                 <select name="" id="searchSelect">
-                    <option value="">Todas las Áreas</option>
+                    <option value="">Todos los Niveles</option>
                 </select>
                 <button id="searchBtn">Buscar</button>
             </form>
@@ -71,9 +71,9 @@
         <div id="tableDiv">
             <div class="tableHeaderDiv">
                 <div>Nombre</div>
-                <div>Còdigo</div>
+                <div>Identificación</div>
                 <div>Email</div>
-                <div>Àrea</div>
+                <div>Nivel de Acceso</div>
                 <div></div>
             </div>
         </div>
@@ -91,30 +91,33 @@
                 </div>
                 <hr>
                     <div>
-                        <div class="dt">Nº Documento</div>
-                        <input id="persInfoDocument"class="dd" disabled placeholder="Número de documento" name="document" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                        <div class="dt">Nº Identificación</div>
+                        <input id="persInfoIdentificacion"class="dd" disabled placeholder="Identificador" name="document" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                     </div>
                     <div>
                         <div class="dt">Correo Electrónico</div>
                         <input id="persInfoEmail"class="dd" disabled placeholder="Correo Electrónico" name="email" type="email">
                     </div>
                     <div>
-                        <div class="dt">ID</div>
-                        <input id="persInfoId"class="dd" disabled value="hay un error" name="ID"oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                        <div class="dt">Telefono</div>
+                        <input id="persInfoTelefono"class="dd" disabled value="hay un error" name="ID"oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                    </div>
+                    <div>
+                        <div class="dt">Dirección</div>
+                        <input type="text" id="persInfoDireccion" class="dd" disabled>
                     </div>
                 </form>
             </div>
             <hr>
             <div class="otherDiv">
                 <form action="" id="editProfesorForm">
-                    <div class="dt">Área académica</div>
-                    <select name="area" id="nivelAccesoSelect" class="dd"></select>
-                    <div class="dt">Área académica</div>
-                    <select name="area" id="sedeSelect" class="dd"></select>
-                    <div class="dt">Área académica</div>
-                    <select name="area" id="jornadaSelect" class="dd"></select>
-                    </div>
-                    <button class="btn submitProfesor">Guardar Cambios</button>
+                    <div class="dt">Nivel de Acceso</div>
+                    <select name="nvAcceso" id="nivelAccesoSelect" class="dd"></select>
+                    <div class="dt">Sede</div>
+                    <select name="sede" id="sedeSelect" class="dd"></select>
+                    <div class="dt">Jornada</div>
+                    <select name="jornada" id="jornadaSelect" class="dd"></select>
+                    <button class="btn submitProfesor centradoalafuerza">Guardar Cambios</button>
                 </form>
             </div>
         </div>

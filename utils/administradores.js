@@ -2,19 +2,19 @@ import{inicializarAdministradores, inicializarCursosDisponibles} from "./data.js
 import { cargarTema ,cambiarTema, modificarProfilePanel} from "./basicFuntions.js"
 
 cargarTema()
-modificarProfilePanel()
+//modificarProfilePanel()
 
 document.getElementById("themeBtn").addEventListener("click",cambiarTema)
 
 
-inicializarProfesores();
+inicializarAdministradores();
 inicializarCursosDisponibles();
 
 const tableDiv = document.getElementById("tableDiv")
 const administradoresData = JSON.parse(localStorage.getItem("administradores"))
 const cursosData = JSON.parse(localStorage.getItem("cursosDisponibles"))
 const searchForm = document.getElementById("searchForm")
-
+const persInfoTelefono = document.getElementById("persInfoTelefono")
 const persInfoForm = document.getElementById("persInfoForm")
 const addBtn = document.getElementById("addBtn")
 const searchInput = document.getElementById("searchInput")
@@ -25,7 +25,7 @@ const coursesDiv = document.getElementById("coursesDiv")
 const nivelAccesoSelect = document.getElementById("nivelAccesoSelect")
 const sedeSelect = document.getElementById("sedeSelect")
 const jornadaSelect = document.getElementById("jornadaSelect")
-const areasEditProfesorForm = document.getElementById("editProfesorForm")
+const editAdminForm = document.getElementById("editProfesorForm")
 
 const popup = document.getElementById("popup")
 const okBtn = document.getElementById("okBtn")
@@ -37,9 +37,9 @@ const popupText = document.getElementById("popupText")
 const persInfoName = document.getElementById("persInfoName")
 const persInfoLastName = document.getElementById("persInfoLastName")
 const persInfoImg = document.getElementById("persInfoImg")
-const persInfoDocument = document.getElementById("persInfoDocument")
+const persInfoDireccion = document.getElementById("persInfoDireccion")
 const persInfoEmail = document.getElementById("persInfoEmail")
-const persInfoId = document.getElementById("persInfoId")
+const persInfoIdentificacion = document.getElementById("persInfoIdentificacion")
 //Este const ayuda a validar que el value sea un correo electronico valido usando .test
 const estructuraEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 function mostrarAdministradores(data){
@@ -48,31 +48,30 @@ function mostrarAdministradores(data){
         const nombre = admin.nombres
         const apellidos = admin.apellidos
         const identificacion = admin.identificacion
-        const sede = admin.sede
         const email = admin.email
         const foto = admin.fotoPerfil
-
-        const profesorDiv = document.createElement("div")
-        profesorDiv.classList.add("profesorDiv")
-        profesorDiv.innerHTML=`
+        const nivelAcceso = admin.nivelAcceso
+        const adminDiv = document.createElement("div")
+        adminDiv.classList.add("profesorDiv")
+        adminDiv.innerHTML=`
         <div class="profesorName"><img src=${foto}> ${nombre} ${apellidos}</div>
-        <div>${id}</div>
+        <div>${identificacion}</div>
         <div class="cortarTexto">${email}</div>
-        <div>${area}</div>
-        <div class="profesorDivBtns"><button class="btn editBtn" title="Editar Docente" data-id=${id}><i class="fa-solid fa-pen-to-square editBtnI"></i></button>
-            <button class="btn deleteBtn" title="Eliminar Docente" data-id=${id}><i class="fa-solid fa-xmark"></i></button></div>
+        <div>${nivelAcceso}</div>
+        <div class="profesorDivBtns"><button class="btn editBtn" title="Editar Docente" data-id=${identificacion}><i class="fa-solid fa-pen-to-square editBtnI"></i></button>
+            <button class="btn deleteBtn" title="Eliminar Docente" data-id=${identificacion}><i class="fa-solid fa-xmark"></i></button></div>
         `
-        tableDiv.append(profesorDiv)
+        tableDiv.append(adminDiv)
         }
     });
 }
-function buscarProfesores(searchQuery){
+function buscarAdministradores(searchQuery){
     return administradoresData.filter(admin =>(
     (admin.nombres.toLowerCase().includes(searchQuery.toLowerCase())
     || admin.apellidos.toLowerCase().includes(searchQuery.toLowerCase()) 
-    || admin.identificacion.toLowerCase().includes(searchQuery.toLowerCase())
+    || String(admin.identificacion).toLowerCase().includes(searchQuery.toLowerCase())
     )
-&&  (profesor.areaAcademica.toLowerCase() === searchSelect.value.toLowerCase() || searchSelect.value.trim()==="")))
+&&  (admin.nivelAcceso.toLowerCase() === searchSelect.value.toLowerCase() || searchSelect.value.trim()==="")))
 }
 
 searchForm.addEventListener("submit",(event)=>{
@@ -81,15 +80,15 @@ searchForm.addEventListener("submit",(event)=>{
     tableDiv.innerHTML=`
     <div class="tableHeaderDiv">
         <div>Nombre</div>
-        <div>Còdigo</div>
+        <div>Identificación</div>
         <div>Email</div>
-        <div>Àrea</div>
+        <div>Nivel de Acceso</div>
         <div></div>
     </div>
     `
     let searchQuery = searchInput.value
-    let filteredProfesores = buscarProfesores(searchQuery)
-    mostrarAdministradores(filteredProfesores);
+    let filteredAdministradores = buscarAdministradores(searchQuery)
+    mostrarAdministradores(filteredAdministradores);
 })
 function addProfesor(){
     //MOSTRAR EL MODAL
@@ -101,16 +100,16 @@ function addProfesor(){
         persInfoImg.src="../media/profilePlaceholder.png"
         persInfoName.value=""
         persInfoLastName.value=""
-        persInfoDocument.value=""
+        persInfoDireccion.value=""
         persInfoEmail.value=""
         persInfoId.value=""
     //=======================
     //CARGAR AREAS ACADEMICAS
-    areaAcademicaSelect.innerHTML=""
-    cargarAreasSelect(areaAcademicaSelect);
+    //areaAcademicaSelect.innerHTML=""
+    //cargarAreasSelect(areaAcademicaSelect);
     //=====================
     //CARGAR CURSOS
-    mostrarCursos(cargarCursos(areaAcademicaSelect.value))
+    //mostrarCursos(cargarCursos(areaAcademicaSelect.value))
     //=====================
     //ACTIVAR INPUTS
     const inputs = persInfoForm.querySelectorAll('input')
@@ -145,9 +144,10 @@ addBtn.addEventListener("click", addProfesor)
 
 function cargarSelects(select,akey){
     let lista = [];
+
     administradoresData.forEach(admin => {
-        if(lista.includes(admin.akey) === false){
-            lista.push(admin.aKey)
+        if(lista.includes(admin[akey]) === false){
+            lista.push(admin[akey])
         }
     })
     lista.forEach(cosa => {
@@ -157,9 +157,7 @@ function cargarSelects(select,akey){
         select.append(opt)
     })
 }
-cargarSelects(nivelAccesoSelect)
-cargarSelects(sedeSelect)
-cargarSelects(jornadaSelect)
+cargarSelects(searchSelect, "nivelAcceso")
 //===============
 
 function cargarCursos(areaAcademica){
@@ -203,19 +201,16 @@ function editProfesor(editBtn){
     )
     persInfoLastName.classList.add("hidden")
     persInfoName.classList.remove("inputFormStyle")
+     //DATOS DEL PROFESOR
+    let adminData = buscarAdministradores(editBtn.dataset.id)
+     //=====================
     //EDITAR AREA ACADEMICA
-    let cursosProfesor=buscarProfesores(editBtn.dataset.id)[0].cursos
-    let areaAcademica=buscarProfesores(editBtn.dataset.id)[0].areaAcademica
-    areaAcademicaSelect.innerHTML=""
-    cargarAreasSelect(areaAcademicaSelect);
-    areaAcademicaSelect.value = areaAcademica.toLowerCase()
-    //=====================
-    //EDITAR CURSOS
-    coursesDiv.innerHTML=""
-    mostrarCursos(cargarCursos(areaAcademicaSelect.value),cursosProfesor)
-    //=====================
-    //DATOS DEL PROFESOR
-        let profesorData = buscarProfesores(editBtn.dataset.id)
+        cargarSelects(nivelAccesoSelect, "nivelAcceso")
+        cargarSelects(sedeSelect, "sede")
+        cargarSelects(jornadaSelect, "jornada")
+        nivelAccesoSelect.value=adminData[0].nivelAcceso.toLowerCase()
+        sedeSelect.value=adminData[0].sede.toLowerCase()
+        jornadaSelect.value=adminData[0].jornada.toLowerCase()
     //=====================
 
     overlay.scrollTop=0 //RESET SCROLLBAR
@@ -227,16 +222,14 @@ function editProfesor(editBtn){
     //====================
 
     //CARGAR INFO PROFESOR
-    persInfoImg.src=profesorData[0].fotoUrl
-    persInfoName.value=profesorData[0].nombres + " " + profesorData[0].apellidos
-    persInfoDocument.value=profesorData[0].identificacion
-    persInfoEmail.value=profesorData[0].email
-    persInfoId.value=profesorData[0].codigo
+    persInfoImg.src=adminData[0].fotoPerfil
+    persInfoName.value=adminData[0].nombres + " " + adminData[0].apellidos
+    persInfoDireccion.value=adminData[0].direccion
+    persInfoEmail.value=adminData[0].email
+    persInfoTelefono.value=adminData[0].telefono
+    persInfoIdentificacion.value=adminData[0].identificacion
     //======================
 }
-areaAcademicaSelect.addEventListener("change",()=>{
-    mostrarCursos(cargarCursos(areaAcademicaSelect.value))
-})
 //=============
 function cerrarEdit(){
     if(popup.classList.contains("hidden")){
@@ -313,10 +306,10 @@ async function popupConfirm(message) {
         notBtn.addEventListener("click", cancel);
     });
 }
-areasEditProfesorForm.addEventListener("submit",async (e)=>{
+editAdminForm.addEventListener("submit",async (e)=>{
     e.preventDefault()
-    if(persInfoName.value.trim()==="" || persInfoDocument.value.trim()===""|| persInfoEmail.value.trim()===""
-    || persInfoId.value.trim()===""
+    if(persInfoName.value.trim()==="" || persInfoDireccion.value.trim()===""|| persInfoEmail.value.trim()===""
+    || persInfoIdentificacion.value.trim()==="" || persInfoTelefono.value.trim()===""
     ){
     await popupConfirm("Un campo está vacio, asegurese de llenar todos los campos al crear un nuevo usuario")
     cerrarEdit()
@@ -329,46 +322,44 @@ areasEditProfesorForm.addEventListener("submit",async (e)=>{
     
 //AGARRAR DATOS DEL FORM
     const formData = new FormData(e.target)
-    const nuevosCursos = formData.getAll("curso")
-    const nuevaArea = formData.get("area")
+    const nuevoNivelAcceso = formData.getAll("nvAcceso")
+    const nuevaSede = formData.get("sede")
+    const nuevaJornada = formData.get("jornada")
 //AGARRAR DATOS DEL DOM
-    const id = persInfoId.value
+    const id = persInfoIdentificacion.value
 
-    let profesores = JSON.parse(localStorage.getItem("profesores"))
-//BUSCAR AL PROFESOR EN LA LISTA DE LOCALSTORAGE
-    const index = profesores.findIndex(p => p.codigo === id)
-    if(index !== -1){
-        //VERIFICAR QUE EXISTA
-        profesores[index].areaAcademica = capitalizar(nuevaArea)
-
-        profesores[index].cursos = nuevosCursos.map(cursoId => ({
-            categoriaId: Number(cursoId[0]),
-            cursoId: Number(cursoId)
-        }))
+    let admins = JSON.parse(localStorage.getItem("administradores"))
+//BUSCAR AL -ADMINISTRADOR- EN LA LISTA DE LOCALSTORAGE
+    const index = admins.findIndex(p => p.identificacion === id)
+    if(index !== -1){//VERIFICAR QUE EXISTA
+        admins[index].nivelAcceso = capitalizar(nuevoNivelAcceso)
+        admins[index].sede = capitalizar(nuevaSede)
+        admins[index].jornada = capitalizar(nuevaJornada)
     } else { //SI NO EXISTE, CREAR UNO
-            const emailExiste = profesores.some(p => 
-                p.email === persInfoEmail.value && p.codigo !== persInfoId.value
+            const emailExiste = admins.some(p => 
+                p.email === admins.value && p.email !== persInfoEmail.value
             )
-            const documentoExiste = profesores.some(p => 
-                p.identificacion === persInfoDocument.value && p.codigo !== persInfoId.value
+            const telefonoExiste = admins.some(p => 
+                p.telefono === persInfoTelefono.value && p.telefono !== persInfoTelefono.value
             )
-            if (emailExiste || documentoExiste){
+            if (emailExiste || telefonoExiste){
                 await popupConfirm("El documento o correo electronico ya está registrado, asegurese de no ingresar uno ya existente")
             } else {
-        profesores.push(
+        admins.push(
             {
-            active: true,
-            codigo: persInfoId.value,
-            identificacion: persInfoDocument.value,
+            identificacion: persInfoIdentificacion.value,
             nombres: persInfoName.value,
             apellidos: persInfoLastName.value,
             email: persInfoEmail.value,
-            fotoUrl: "../media/profilePlaceholder.png",
-            areaAcademica: capitalizar(nuevaArea),
-            cursos: nuevosCursos.map(cursoId => ({
-                categoriaId: Number(cursoId[0]),
-                cursoId: Number(cursoId)
-            }))
+            telefono: persInfoTelefono.value,
+            cargo: "Administrador",
+            password: "admin123",
+            direccion: persInfoDireccion.value,
+            fotoPerfil: persInfoImg.value,
+            nivelAcceso: capitalizar(nivelAccesoSelect.value),
+            sede: capitalizar(sedeSelect.value),
+            active: true,
+            jornada: capitalizar(jornadaSelect.value)
             },
         )
         //GUARDAR DATOS EN LOCALSTORAGE
@@ -377,8 +368,8 @@ areasEditProfesorForm.addEventListener("submit",async (e)=>{
     
     }
 //FINALMENTE, RECARGAR LA PAGINA PARA APLICAR CAMBIOS
-    localStorage.setItem("profesores", JSON.stringify(profesores))
-    window.location.href="docentes.html"
+    localStorage.setItem("administradores", JSON.stringify(admins))
+    window.location.href="administradores.html"
 } else {
     cerrarEdit()
 }

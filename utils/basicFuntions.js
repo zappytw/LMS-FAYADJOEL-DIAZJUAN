@@ -23,6 +23,6 @@ export function modificarProfilePanel(){
     const btnProfile = document.querySelector(".btnProfile")
     const usuarioLogeado = JSON.parse(localStorage.getItem("usuarioLogeado"))
 
-    if(usuarioLogeado.fotoPerfil) btnProfile.querySelector("img").src = usuarioLogeado.fotoPerfil
+    if(usuarioLogeado.fotoPerfil) btnProfile.querySelector("img").src = usuarioLogeado.fotoPerfil || "../media/profilePlaceholder.png"
     if(usuarioLogeado.nombres) btnProfile.querySelector("div").textContent = usuarioLogeado.nombres
 }
