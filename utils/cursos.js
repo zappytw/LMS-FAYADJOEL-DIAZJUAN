@@ -164,6 +164,8 @@ function eliminarCursoAProfesor(codigoProfesor,IDcurso){
     })
 }
 
+let IDcursoEdit;
+let dataProfesorEdit;
 pageContent.addEventListener("click", function(event) {
     
     const btnContainer = event.target.closest(".btns");
@@ -198,7 +200,7 @@ pageContent.addEventListener("click", function(event) {
         divImgInfo.innerHTML = `
             <h1>${dataCurso.titulo}</h1>
             <div>
-                <span class="spanInfo">${dataCurso.duracion}</span>
+                <span class="spanInfo">${dataCurso.duracion} semanas</span>
                 <span class="spanInfo">${dataCurso.nivel}</span>
             </div>
             <p>${dataCurso.descripcion}</p>
@@ -222,10 +224,10 @@ pageContent.addEventListener("click", function(event) {
         let modulosCurso = ""
         dataCurso.modulos.forEach(m => {
             modulosCurso += `
-                <div class="modulo">
+                <button id="${IDcurso}${m.numero}" class="modulo">
                     <span>modulo ${m.numero}</span>
                     <span>${m.titulo}</span>
-                </div>
+                </button>
             `;
         })
 
@@ -272,21 +274,7 @@ pageContent.addEventListener("click", function(event) {
     }
 
     if (event.target.closest(".btnEdit")) {
-        document.getElementById("btnCrearCurso").textContent = "Edict";
-
-        cursosDisponibles = eliminarCurso(IDcurso)
-        localStorage.setItem(
-            "cursosDisponibles",
-            JSON.stringify(cursosDisponibles)
-        );
-        profesores = eliminarCursoAProfesor(dataProfesor.codigo,IDcurso)
-        localStorage.setItem(
-            "profesores",
-            JSON.stringify(profesores)
-        );
-
-        console.log(cursosDisponibles)
-        console.log(profesores)
+        document.getElementById("btnCrearCurso").textContent = "Edict"; 
 
         divCCF.classList.remove("invi")
 
@@ -295,6 +283,7 @@ pageContent.addEventListener("click", function(event) {
         document.getElementById("temas").value = dataCurso.temasClaves.join(", ")
         document.getElementById("prerequisitos").value = dataCurso.prerequisitos.join(", ")
 
+        modulosContainer.innerHTML = "";
         dataCurso.modulos.forEach( m => {
             modulosContainer.innerHTML += `
                 <div class="moduloCreated">
@@ -310,6 +299,9 @@ pageContent.addEventListener("click", function(event) {
         document.getElementById("nivel").value = dataCurso.nivel
         document.getElementById("categoria").value = dataCategoria.id
         document.getElementById("profesor").value = dataProfesor.codigo
+
+        IDcursoEdit = IDcurso
+        dataProfesorEdit = dataProfesor
     }
     
     if (event.target.closest(".btnRemove")) {
@@ -326,8 +318,30 @@ pageContent.addEventListener("click", function(event) {
 
 });
 
+//ESTO TOCA TERMINARLO
+document.addEventListener("click", (e) => {
+    if (e.target.classList.contains("modulo")) {
+        console.log(e.target.id);
+    }
+});
+
+//GUARDA LOS DATOS DE EL FORMULARIO
 crearCursoForm.addEventListener("submit", function(e) {
     e.preventDefault();
+
+    //si el boton dice "edit" entonces se elimina el antiguo y se guarda el nuevo
+    if (document.getElementById("btnCrearCurso").textContent === "Edict"){
+        cursosDisponibles = eliminarCurso(IDcursoEdit)
+        localStorage.setItem(
+            "cursosDisponibles",
+            JSON.stringify(cursosDisponibles)
+        );
+        profesores = eliminarCursoAProfesor(dataProfesorEdit.codigo,IDcursoEdit)
+        localStorage.setItem(
+            "profesores",
+            JSON.stringify(profesores)
+        );
+    }
 
     const formData = new FormData(crearCursoForm);
 

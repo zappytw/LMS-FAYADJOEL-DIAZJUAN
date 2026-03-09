@@ -197,6 +197,8 @@
 .divInfoCourse .card p{color: var(--pColor);}
 
 .divInfoCourse .card .modulo{
+    display: flex;
+    justify-content: start;
     padding: 10px;
     border-radius: 15px;
     background-color: var(--moduloDiv);
@@ -229,6 +231,8 @@
     bottom: 20px;
     right: 20px;
     z-index: 1000;
+
+    font-size: 20px;
 
     display: flex;
     align-items: center;
@@ -293,8 +297,11 @@
 
     width: 90vw;
     max-width: 800px;
+    height: 80vh;
     padding: 20px;
     border-radius: 20px;
+
+    overflow-y: scroll;
 
     background-color: var(--bgForm);
 }
@@ -387,6 +394,10 @@
     flex-direction: column;
 
     width: 100%;
+}
+
+.divCCF .form-group .sub-form-group input{
+    color: black;
 }
 
 .divCCF button{
