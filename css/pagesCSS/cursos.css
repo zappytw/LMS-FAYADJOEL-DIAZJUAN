@@ -411,3 +411,81 @@
     border-radius: 20px;
 }
 
+/*RESUMEN DE CADA CURSO*/
+
+.resumen{
+    display: flex;
+    justify-self: center;
+    width: 300px;
+    margin: 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    background-color: #be9942;
+    padding: 10px;
+    text-align: center;
+    justify-content: center;
+}
+
+.divResumenContainer{
+    position: fixed;
+    z-index: 1001;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100vw;
+    height: 100vh;
+    
+    background-color: rgba(0, 0, 0, 0.76);
+}
+
+.divResumenContainer #resumenCurso{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    height: fit-content;
+    padding: 20px;
+    border-radius: 20px;
+
+    background-color: var(--bgForm);
+}
+
+table {
+    border-collapse: collapse;
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--bgBody);
+    border-radius: 8px;
+    overflow: hidden;
+    border-collapse: separate;
+    border-spacing: 0 10px; /* separa las filas */
+}
+
+tr{
+    background-color: var(--bgCard);
+    color: var(--pColor);
+}
+
+table .titulos {
+    color: var(--spanColor1);
+}
+
+th, td {
+    padding: 12px 16px;
+    text-align: left;
+}
+
+th {
+    font-weight: 600;
+}
+
+tr th:first-child {
+    border-radius: 8px 0 0 8px;
+}
+
+tr th:last-child {
+    border-radius: 0 8px 8px 0;
+}
+

@@ -254,18 +254,21 @@ pageContent.addEventListener("click", function(event) {
                     </div>
                 </div>
             </div>
-            <div class="card">
-                <div>
-                    <h1>$ ${dataCurso.valor}</h1>
-                    <p>One-time payment</p>
+            <div>
+                <div class="card">
+                    <div>
+                        <h1>$ ${dataCurso.valor}</h1>
+                        <p>One-time payment</p>
+                    </div>
+                    <div class="espace">
+                        <p><i class="fa-solid fa-check"></i> Lifetime access</p>
+                        <p><i class="fa-solid fa-check"></i> Certificate of completion</p>
+                        <p><i class="fa-solid fa-check"></i> 30-day money-back guarantee</p>
+                        <p><i class="fa-solid fa-check"></i> Direct instructor support</p>
+                    </div>
+                    <button>Start Learning</button>
                 </div>
-                <div class="espace">
-                    <p><i class="fa-solid fa-check"></i> Lifetime access</p>
-                    <p><i class="fa-solid fa-check"></i> Certificate of completion</p>
-                    <p><i class="fa-solid fa-check"></i> 30-day money-back guarantee</p>
-                    <p><i class="fa-solid fa-check"></i> Direct instructor support</p>
-                </div>
-                <button>Start Learning</button>
+                <button class="resumen" id="${IDcurso}">resumen</button>
             </div>
         `;
 
@@ -318,12 +321,52 @@ pageContent.addEventListener("click", function(event) {
 
 });
 
-//ESTO TOCA TERMINARLO
+const resumenCurso = document.getElementById("resumenCurso")
+const divResumenContainer = document.querySelector(".divResumenContainer")
+//FUNCION PARA MOSTRAR EL RESUMEN DEL CURSO CUANDO SE HAGA CLICK EN EL BOTON RESUMEN
 document.addEventListener("click", (e) => {
-    if (e.target.classList.contains("modulo")) {
+    if (e.target.classList.contains("resumen")) {
+        divResumenContainer.classList.remove("invi")
+
         console.log(e.target.id);
+        const dataCurso = cursosDisponibles.categorias.
+            find(c => c.cursos.some(curso => curso.id === Number(e.target.id)))
+            .cursos.find(curso => curso.id === Number(e.target.id))
+
+        const titulo = dataCurso.titulo
+        const numModulos = dataCurso.modulos.length
+        const numLecciones = 20
+        const intensidadHoraria = dataCurso.duracion
+
+        resumenCurso.innerHTML = `
+            <table>
+                <tr>
+                    <th class="titulos">Curso</th>
+                    <th>${titulo}</th>
+                </tr>
+                <tr>
+                    <th class="titulos">Modulos</th>
+                    <th>${numModulos}</th>
+                </tr>
+                <tr>
+                    <th class="titulos">Lecciones</th>
+                    <th>${numLecciones}</th>
+                </tr>
+                <tr>
+                    <th class="titulos">Intensidad Horaria</th>
+                    <th>${intensidadHoraria} semanas</th>
+                </tr>
+            </table>
+        `;
     }
 });
+
+//ESCONDER EL RESUMEN CUANDO SE HAGA CLICK FUERA DE EL
+divResumenContainer.addEventListener("click",function(e){
+    if (e.target === divResumenContainer){
+        divResumenContainer.classList.add("invi")
+    }
+})
 
 //GUARDA LOS DATOS DE EL FORMULARIO
 crearCursoForm.addEventListener("submit", function(e) {
