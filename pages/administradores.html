@@ -7,16 +7,19 @@
     <!--FONTS-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Climate+Crisis:YEAR@1979&display=swap" rel="stylesheet">
     <!--ICONS-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!--ESTILOS-->
+    <!-- ESTILOS -->
     <link rel="stylesheet" href="../css/vars.css">
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/pagesCSS/docentes.css">
+    <!--FAVICON-->
+    <link rel="icon" href="../media/favicon_io/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../media/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../media/favicon_io/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../media/favicon_io/apple-touch-icon.png">
+    <link rel="manifest" href="../media/favicon_io/site.webmanifest">
 </head>
 <body>
     <nav>
@@ -54,7 +57,7 @@
     </nav>
     <main>
         <header>
-            <h1 class="pageTitle">Docentes</h1>
+            <h1 class="pageTitle">Administradores</h1>
         </header>
         <div class="searchAddDiv">
             <form id="searchForm">
@@ -100,11 +103,11 @@
                     </div>
                     <div>
                         <div class="dt">Telefono</div>
-                        <input id="persInfoTelefono"class="dd" disabled value="hay un error" name="ID"oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                        <input id="persInfoTelefono"class="dd" disabled value="hay un error" name="ID"oninput="this.value = this.value.replace(/[^0-9]/g, '')" placeholder="Numero de telefono">
                     </div>
                     <div>
                         <div class="dt">Dirección</div>
-                        <input type="text" id="persInfoDireccion" class="dd" disabled>
+                        <input type="text" id="persInfoDireccion" class="dd" disabled placeholder="Dirección">
                     </div>
                 </form>
             </div>
